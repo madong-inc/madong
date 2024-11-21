@@ -184,6 +184,6 @@ Route::group('/system', function () {
     app\admin\middleware\AdminAuthTokenMiddleware::class,
     app\admin\middleware\AdminAuthPermissionMiddleware::class,
     app\admin\middleware\AdminLogMiddleware::class,
-    app\admin\middleware\RouteRestrictionMiddleware::class,//演示系统拦截不允许操作路由
+//    app\admin\middleware\RouteRestrictionMiddleware::class,//演示系统拦截不允许操作路由
 ]);
 
