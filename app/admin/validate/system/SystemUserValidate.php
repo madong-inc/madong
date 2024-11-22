@@ -21,7 +21,7 @@ class SystemUserValidate extends Validate
      * 定义验证规则
      */
     protected $rule = [
-        'user_name'    => 'require|max:18|unique',
+        'user_name'    => 'require|max:18|unique:user_name',
         'real_name'    => 'require',
         'password'     => 'require|min:5|max:18',
         'dept_id'      => 'require',
@@ -35,7 +35,8 @@ class SystemUserValidate extends Validate
     protected $message = [
         'user_name.require'    => '用户名必须填写',
         'user_name.max'        => '用户名最多不能超过18个字符',
-        'user_name.unique'     => '用户名已被占用', 'user_name.require' => '用户名必须填写',
+        'user_name.unique'     => '用户名已被占用',
+        'user_name.require' => '用户名必须填写',
         'real_name.require'    => '姓名必须填写',
         'password.require'     => '密码必须填写',
         'password.min'         => '密码最少为5位',

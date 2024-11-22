@@ -12,6 +12,7 @@
 
 namespace app\services\system;
 
+use app\model\system\SystemUser;
 use madong\services\cache\CacheService;
 use support\Container;
 use Webman\Event\Event;
@@ -33,10 +34,11 @@ class SystemUserService extends BaseService
      *
      * @param $id
      *
-     * @return \app\model\system\SystemUser|null
+     * @return SystemUser|null
      */
-    public function get($id): \app\model\system\SystemUser|null
+    public function get($id): SystemUser|null
     {
+        /** @var SystemUser|null $model */
         $model = $this->dao->get($id, ['*'], ['roles', 'posts', 'depts']);
 //        var_dump($model->getLastSql());
         if (!empty($model)) {
@@ -79,9 +81,9 @@ class SystemUserService extends BaseService
      *
      * @param array $data
      *
-     * @return \app\model\system\SystemUser|null
+     * @return SystemUser|null
      */
-    public function save(array $data): \app\model\system\SystemUser|null
+    public function save(array $data): SystemUser|null
     {
         try {
             return $this->transaction(function () use ($data) {
@@ -288,40 +290,32 @@ class SystemUserService extends BaseService
     public function getUsersExcludingRole(array $where, string $field, int $page, int $limit): array
     {
         $roleId = $where['role_id'];
+
+        /**@var SystemUserRoleService $systemUserRoleService*/
+        $systemUserRoleService = Container::make(SystemUserRoleService::class);
+
+        $excludUserIds=$systemUserRoleService->getColumn( ['role_id' => $roleId],'user_id');
+
         // 1.0 获取总数
         $total = $this->dao->getModel()
             ->with(['roles'])
+            ->whereNotIn('id',$excludUserIds)
             ->when(!empty($where), function ($query) use ($where) {
                 unset($where['role_id']);
                 $query->where($where);
-            })
-            ->filter(function ($user) use ($roleId) {
-                $roles = $user->roles ?? null;
-                if (empty($roles)) {
-                    return true;
-                }
-                $array = $roles->toArray();
-                return !in_array($roleId, array_column($array, 'id'));
             })
             ->count();
 
         // 2.0 获取列表
         $items = $this->dao->getModel()
             ->with(['roles'])
+            ->whereNotIn('id',$excludUserIds)
             ->when($page && $limit, function ($query) use ($page, $limit) {
                 $query->page($page, $limit);
             })
             ->when(!empty($where), function ($query) use ($where) {
                 unset($where['role_id']);
                 $query->where($where);
-            })
-            ->filter(function ($user) use ($roleId) {
-                $roles = $user->roles ?? null;
-                if (empty($roles)) {
-                    return true;
-                }
-                $array = $roles->toArray();
-                return !in_array($roleId, array_column($array, 'id'));
             })
             ->select()
             ->toArray();
