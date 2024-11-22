@@ -84,7 +84,7 @@ class SystemDictService extends BaseService
             $files = glob($directory . '/*.php');
 
             foreach ($files as $file) {
-                $className = 'App\\Enum\\' . pathinfo($file, PATHINFO_FILENAME);
+                $className = 'app\\num\\' . pathinfo($file, PATHINFO_FILENAME);
                 if ($this->isEnumClass($className)) {
                     $enumInfo = $this->getEnumInfo($className);
                     if ($enumInfo) {
@@ -109,6 +109,7 @@ class SystemDictService extends BaseService
             $reflectionClass = new ReflectionClass($className);
             return $reflectionClass->isEnum();
         } catch (ReflectionException $e) {
+            var_dump($e->getMessage());
             return false; // 如果遇到错误则返回 false
         }
     }

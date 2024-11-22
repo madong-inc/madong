@@ -21,7 +21,7 @@ class SystemUserValidate extends Validate
      * 定义验证规则
      */
     protected $rule = [
-        'user_name'    => 'require|max:18|unique:user_name',
+        'user_name'    => 'require|max:18|unique',
         'real_name'    => 'require',
         'password'     => 'require|min:5|max:18',
         'dept_id'      => 'require',
@@ -60,7 +60,7 @@ class SystemUserValidate extends Validate
      */
     protected function unique($value, $rule, $data = []): bool
     {
-        $query = SystemUser::where('user_name', $value);
+        $query = SystemUser::where('user_name', $value)->withTrashed();
         // 如果是更新操作，可以排除当前记录
         if (isset($data['id'])) {
             $query->where('id', '<>', $data['id']);
