@@ -69,6 +69,7 @@ class Cos extends BaseUpload
                 'size' => $file->getSize(),
                 'mime_type' => $file->getUploadMimeType(),
                 'extension' => $file->getUploadExtension(),
+                'base_path' =>$this->dirSeparator . $object
             ];
         }
 

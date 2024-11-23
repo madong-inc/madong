@@ -43,6 +43,7 @@ class Local extends BaseUpload
                 'size'        => $file->getSize(),
                 'mime_type'   => $file->getUploadMimeType(),
                 'extension'   => $file->getUploadExtension(),
+                'base_path'   => empty($dirname) ? $this->dirSeparator . $saveFilename : $this->dirSeparator . $dirname . $this->dirSeparator . $saveFilename
             ];
             $file->move($savePath);
             $result[] = $temp;

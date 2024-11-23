@@ -313,13 +313,14 @@ class SystemAuthService extends BaseService
      */
     private function getAvatarUrl(SystemUser $adminInfo): string
     {
+        /**@var SystemConfigService  $systemConfigService */
         $systemConfigService = Container::make(SystemConfigService::class);
-        $url                 = $systemConfigService->getConfig('site_url', 'system_config');
+        $url                 = $systemConfigService->getConfig('site_url', 'site_setting');
         if (empty($url)) {
             $url        = config('process.webman.listen');
             $parsed_url = parse_url($url);
             $port       = $parsed_url['port'] ?? 8787; // 使用 null 合并运算符
-            $url        = '127.0.0.1:' . $port;
+            $url        = 'http://127.0.0.1:' . $port;
         }
         if (!str_ends_with($url, '/')) {
             $url .= '/';

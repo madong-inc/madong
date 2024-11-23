@@ -152,17 +152,19 @@ class SystemUploadService extends BaseService
 
                 $url    = str_replace('\\', '/', $data['url']);
                 $path   = str_replace('\\', '/', $data['save_path']);
+
                 $inData = [
                     'platform'          => $type,
                     'original_filename' => $data['origin_name'] ?? '',
-                    'filename'          => $path,
+                    'filename'          => $data['save_name'],
                     'hash'              => $hash,
                     'content_type'      => $data['mime_type'],
-                    'base_path'         => $path,
+                    'base_path'         => $data['base_path'],
                     'ext'               => $data['extension'],
                     'size'              => $data['size'],
                     'size_info'         => formatBytes($data['size']),
                     'url'               => $url,
+                    'path'              => $path
                 ];
                 return $this->dao->save($inData);
             });
