@@ -53,6 +53,12 @@ class BaseLaORMModel extends Model
      */
     protected array $dynamicHidden = [];
 
+    /**
+     * 雪花算法实例化类
+     * @var Snowflake|null
+     */
+    private static ?Snowflake $snowflake = null;
+
     protected static function boot()
     {
         parent::boot();
@@ -171,6 +177,17 @@ class BaseLaORMModel extends Model
             $model->setAttribute('updated_by', $uid);
         }
     }
+    /**
+     *  实力话雪花算法
+     * @return Snowflake
+     */
+    private static function createSnowflake():Snowflake
+    {
+        if(self::$snowflake==null){
+            self::$snowflake= new Snowflake(self::WORKER_ID, self::DATA_CENTER_ID);
+        }
+        return self::$snowflake;
+    }
 
     /**
      * 生成雪花ID
@@ -179,7 +196,7 @@ class BaseLaORMModel extends Model
      */
     private static function generateSnowflakeID(): int
     {
-        $snowflake = new Snowflake(self::WORKER_ID, self::DATA_CENTER_ID);
+        $snowflake    = self::createSnowflake();
         return $snowflake->nextId();
     }
 
