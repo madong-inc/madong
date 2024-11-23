@@ -37,6 +37,12 @@ class BaseTpORMModel extends Model
     private const DATA_CENTER_ID = 1;
 
     /**
+     * 雪花算法实例化类
+     * @var Snowflake|null
+     */
+    private static ?Snowflake $snowflake = null;
+
+    /**
      * 获取模型定义的字段列表
      *
      * @return mixed
@@ -131,13 +137,25 @@ class BaseTpORMModel extends Model
     }
 
     /**
+     *  实力话雪花算法
+     * @return Snowflake
+     */
+    private static function createSnowflake():Snowflake
+    {
+        if(self::$snowflake==null){
+            self::$snowflake= new Snowflake(self::WORKER_ID, self::DATA_CENTER_ID);
+        }
+        return self::$snowflake;
+    }
+
+    /**
      * 生成雪花ID
      *
      * @return int
      */
     private static function generateSnowflakeID(): int
     {
-        $snowflake = new Snowflake(self::WORKER_ID, self::DATA_CENTER_ID);
+        $snowflake    = self::createSnowflake();
         return $snowflake->nextId();
     }
 }
