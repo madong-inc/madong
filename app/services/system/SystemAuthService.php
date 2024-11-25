@@ -127,6 +127,7 @@ class SystemAuthService extends BaseService
      */
     public function getAllMenus(array $where = []): array
     {
+        /**@var SystemMenuService  $systemMenuService */
         $systemMenuService = Container::make(SystemMenuService::class);
         $list  = $systemMenuService->dao->selectList($where, '*', 0, 0, 'sort asc', [], true);
         //兼容LaORM
