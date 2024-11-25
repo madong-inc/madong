@@ -12,7 +12,6 @@
 
 namespace madong\basic;
 
-use app\model\system\SystemRecycleBin;
 use app\services\system\SystemRecycleBinService;
 use madong\exception\AdminException;
 use madong\exception\ApiException;

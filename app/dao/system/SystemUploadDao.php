@@ -12,7 +12,6 @@
 
 namespace app\dao\system;
 
-use app\model\system\SystemUpload;
 use madong\basic\BaseDao;
 
 class SystemUploadDao extends BaseDao
@@ -20,7 +19,9 @@ class SystemUploadDao extends BaseDao
 
     protected function setModel(): string
     {
-        return SystemUpload::class;
+                return config('app.model_type') === 'laravelORM'
+            ? 'app\\model\\la\\system\\SystemUpload'
+            : 'app\\model\\tp\\system\\SystemUpload';
     }
 
     public function selectList(array $where, string $field = '*', int $page = 0, int $limit = 0, string $order = '', array $with = [], bool $search = false)

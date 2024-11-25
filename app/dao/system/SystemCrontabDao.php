@@ -12,17 +12,16 @@
 
 namespace app\dao\system;
 
-use app\model\system\SystemCrontab;
-use app\services\system\SystemCrontabLogService;
 use madong\basic\BaseDao;
-use think\Container;
 
 class SystemCrontabDao extends BaseDao
 {
 
     protected function setModel(): string
     {
-        return SystemCrontab::class;
+        return config('app.model_type') === 'laravelORM'
+            ? 'app\\model\\la\\system\\SystemCrontab'
+            : 'app\\model\\tp\\system\\SystemCrontab';
     }
 
 }

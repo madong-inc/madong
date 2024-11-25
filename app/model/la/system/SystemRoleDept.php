@@ -9,20 +9,26 @@
  *+------------------
  * Official Website: http://www.madong.cn
  */
-namespace app\model\system;
 
-use think\model\Pivot;
+namespace app\model\la\system;
 
+
+use Illuminate\Database\Eloquent\Relations\Pivot;
 
 /**
- *
  * 关联模型
+ *
  * @author Mr.April
  * @since  1.0
  */
-class SystemDeptLeader extends Pivot
+class SystemRoleDept extends Pivot
 {
-    protected $name = 'system_dept_leader';
+    protected $table = 'system_role_dept';
 
-
+    /**
+     * 指示是否自动维护时间戳
+     *
+     * @var bool
+     */
+    public $timestamps = false;
 }

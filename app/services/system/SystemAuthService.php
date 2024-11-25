@@ -13,18 +13,16 @@
 namespace app\services\system;
 
 use app\dao\system\SystemUserDao;
-use app\model\system\SystemMenu;
-use app\model\system\SystemUser;
+use app\model\tp\system\SystemMenu;
+use app\model\tp\system\SystemUser;
 use madong\basic\BaseService;
 use madong\exception\AuthException;
 use madong\services\cache\CacheService;
 use madong\utils\Dict;
-use madong\utils\Json;
 use madong\utils\JwtAuth;
 use madong\utils\Tree;
 use support\Container;
 use support\Request;
-use think\db\Query;
 
 class SystemAuthService extends BaseService
 {
@@ -307,7 +305,7 @@ class SystemAuthService extends BaseService
     /**
      * 获取头像
      *
-     * @param \app\model\system\SystemUser $adminInfo
+     * @param \app\model\tp\system\SystemUser $adminInfo
      *
      * @return string
      */

@@ -12,7 +12,6 @@
 
 namespace app\dao\system;
 
-use app\model\system\SystemRecycleBin;
 use madong\basic\BaseDao;
 
 class SystemRecycleBinDao extends BaseDao
@@ -20,7 +19,9 @@ class SystemRecycleBinDao extends BaseDao
 
     protected function setModel(): string
     {
-        return SystemRecycleBin::class;
+               return config('app.model_type') === 'laravelORM'
+            ? 'app\\model\\la\\system\\SystemRecycleBin'
+            : 'app\\model\\tp\\system\\SystemRecycleBin';
     }
 
     public function selectList(array $where, string $field = '*', int $page = 0, int $limit = 0, string $order = '', array $with = [], bool $search = false)

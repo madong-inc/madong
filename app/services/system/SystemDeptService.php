@@ -13,7 +13,7 @@
 namespace app\services\system;
 
 use app\dao\system\SystemDeptDao;
-use app\model\system\SystemDept;
+use app\model\tp\system\SystemDept;
 use madong\basic\BaseService;
 use madong\exception\AdminException;
 use support\Container;
@@ -89,7 +89,7 @@ class SystemDeptService extends BaseService
      *
      * @param $id
      *
-     * @return \app\model\system\SystemDept|null
+     * @return \app\model\tp\system\SystemDept|null
      */
     public function get($id): ?SystemDept
     {

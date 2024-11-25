@@ -12,7 +12,6 @@
 
 namespace app\dao\system;
 
-use app\model\system\SystemUser;
 use madong\basic\BaseDao;
 
 class SystemUserDao extends BaseDao
@@ -20,7 +19,9 @@ class SystemUserDao extends BaseDao
 
     protected function setModel(): string
     {
-        return SystemUser::class;
+                return config('app.model_type') === 'laravelORM'
+            ? 'app\\model\\la\\system\\SystemUser'
+            : 'app\\model\\tp\\system\\SystemUser';
     }
 
 }

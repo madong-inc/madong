@@ -12,14 +12,14 @@
 
 namespace app\services\system;
 
-use app\model\system\SystemUser;
-use madong\services\cache\CacheService;
-use support\Container;
-use Webman\Event\Event;
-use madong\utils\JwtAuth;
+use app\dao\system\SystemUserDao;
+use app\model\tp\system\SystemUser;
 use madong\basic\BaseService;
 use madong\exception\AdminException;
-use app\dao\system\SystemUserDao;
+use madong\services\cache\CacheService;
+use madong\utils\JwtAuth;
+use support\Container;
+use Webman\Event\Event;
 
 class SystemUserService extends BaseService
 {

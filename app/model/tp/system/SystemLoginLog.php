@@ -9,17 +9,20 @@
  *+------------------
  * Official Website: http://www.madong.cn
  */
-namespace app\model\system;
+namespace app\model\tp\system;
 
-use think\model\Pivot;
+use madong\basic\BaseTpORMModel;
 
-/**
- *
- * 用户管理岗位-中间模型
- * @author Mr.April
- * @since  1.0
- */
-class SystemUserPost extends Pivot
+class SystemLoginLog extends BaseTpORMModel
 {
-    protected $name = 'system_user_post';
+
+    /**
+     * 数据表主键
+     *
+     * @var string
+     */
+    protected $pk = 'id';
+
+    protected $name = 'system_login_log';
+
 }

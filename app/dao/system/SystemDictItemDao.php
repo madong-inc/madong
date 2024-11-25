@@ -12,7 +12,6 @@
 
 namespace app\dao\system;
 
-use app\model\system\SystemDictItem;
 use madong\basic\BaseDao;
 
 class SystemDictItemDao extends BaseDao
@@ -20,7 +19,9 @@ class SystemDictItemDao extends BaseDao
 
     protected function setModel(): string
     {
-        return SystemDictItem::class;
+                return config('app.model_type') === 'laravelORM'
+            ? 'app\\model\\la\\system\\SystemDictItem'
+            : 'app\\model\\tp\\system\\SystemDictItem';
     }
 
 }

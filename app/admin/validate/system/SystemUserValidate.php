@@ -12,7 +12,7 @@
 
 namespace app\admin\validate\system;
 
-use app\model\system\SystemUser;
+use app\model\tp\system\SystemUser;
 use think\Validate;
 
 class SystemUserValidate extends Validate

@@ -12,7 +12,6 @@
 
 namespace app\dao\system;
 
-use app\model\system\SystemConfig;
 use madong\basic\BaseDao;
 
 class SystemConfigDao extends BaseDao
@@ -20,6 +19,8 @@ class SystemConfigDao extends BaseDao
 
     protected function setModel(): string
     {
-        return SystemConfig::class;
+        return config('app.model_type') === 'laravelORM'
+            ? 'app\\model\\la\\system\\SystemConfig'
+            : 'app\\model\\tp\\system\\SystemConfig';
     }
 }

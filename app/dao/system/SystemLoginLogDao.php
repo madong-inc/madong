@@ -12,7 +12,6 @@
 
 namespace app\dao\system;
 
-use app\model\system\SystemLoginLog;
 use madong\basic\BaseDao;
 
 class SystemLoginLogDao extends BaseDao
@@ -20,6 +19,8 @@ class SystemLoginLogDao extends BaseDao
 
     protected function setModel(): string
     {
-        return SystemLoginLog::class;
+                return config('app.model_type') === 'laravelORM'
+            ? 'app\\model\\la\\system\\SystemLoginLog'
+            : 'app\\model\\tp\\system\\SystemLoginLog';
     }
 }

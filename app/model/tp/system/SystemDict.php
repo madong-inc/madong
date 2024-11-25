@@ -9,11 +9,9 @@
  *+------------------
  * Official Website: http://www.madong.cn
  */
-namespace app\model\system;
+namespace app\model\tp\system;
 
 use madong\basic\BaseTpORMModel;
-use madong\trait\ModelTrait;
-use madong\trait\SnowflakeIdTrait;
 
 /**
  * 字典模型

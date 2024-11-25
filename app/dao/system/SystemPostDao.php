@@ -9,9 +9,9 @@
  *+------------------
  * Official Website: http://www.madong.tech
  */
+
 namespace app\dao\system;
 
-use app\model\system\SystemPost;
 use madong\basic\BaseDao;
 
 class SystemPostDao extends BaseDao
@@ -19,6 +19,8 @@ class SystemPostDao extends BaseDao
 
     protected function setModel(): string
     {
-        return SystemPost::class;
+        return config('app.model_type') === 'laravelORM'
+            ? 'app\\model\\la\\system\\SystemPost'
+            : 'app\\model\\tp\\system\\SystemPost';
     }
 }

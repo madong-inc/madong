@@ -10,9 +10,9 @@
  * Official Website: http://www.madong.cn
  */
 
-namespace app\model\system;
+namespace app\model\la\system;
 
-use madong\basic\BaseTpORMModel;
+use madong\basic\BaseLaORMModel;
 
 /**
  * 定时任务
@@ -20,22 +20,33 @@ use madong\basic\BaseTpORMModel;
  * @author Mr.April
  * @since  1.0
  */
-class SystemCrontab extends BaseTpORMModel
+class SystemCrontab extends BaseLaORMModel
 {
 
-    protected $name = 'system_crontab';
+    protected $table = 'system_crontab';
 
+    protected $primaryKey = 'id';
 
-    protected $pk = 'id';
+    /**
+     *  通过ID获取最后执行记录
+     *
+     * @return mixed
+     */
+    public function getLogAttribute(): mixed
+    {
+        return SystemCrontabLog::getModel()->where(['crontab_id' => $this->id])
+            ->orderBy('create_time', 'desc')
+            ->first();
+    }
 
     /**
      * 获取器-创建时间
      *
      * @param $value
      *
-     * @return bool|string
+     * @return string
      */
-    public function getCreateTimeAttr($value): bool|string
+    public function getCreateTimeAttribute($value): string
     {
         return getDateText($value);
         return date('Y-m-d H:i:s', $value); // 将时间戳格式化为日期时间字符串
@@ -48,7 +59,7 @@ class SystemCrontab extends BaseTpORMModel
      *
      * @return bool|string
      */
-    public function getLastRunningTimeAttr($value): bool|string
+    public function getLastRunningTimeAttribute($value): bool|string
     {
         if (!$value) return '--';
         return getDateText($value);
@@ -61,7 +72,7 @@ class SystemCrontab extends BaseTpORMModel
      *
      * @return string
      */
-    public function getRuleNameAttr($value): string
+    public function getRuleNameAttribute($value): string
     {
         $rule_arr = json_decode($this->cycle_rule, true);
         if (empty($rule_arr)) return '错误';
@@ -100,9 +111,9 @@ class SystemCrontab extends BaseTpORMModel
     /**
      * 关联执行志记录表
      *
-     * @return \think\model\relation\HasMany
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function logs(): \think\model\relation\HasMany
+    public function logs(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(SystemCrontabLog::class, 'crontab_id', 'id');
     }

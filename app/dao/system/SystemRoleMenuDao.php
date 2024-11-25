@@ -13,7 +13,6 @@
 namespace app\dao\system;
 
 
-use app\model\system\SystemRoleMenu;
 use madong\basic\BaseDao;
 
 class SystemRoleMenuDao extends BaseDao
@@ -21,6 +20,8 @@ class SystemRoleMenuDao extends BaseDao
 
     protected function setModel(): string
     {
-        return SystemRoleMenu::class;
+                return config('app.model_type') === 'laravelORM'
+            ? 'app\\model\\la\\system\\SystemRoleMenu'
+            : 'app\\model\\tp\\system\\SystemRoleMenu';
     }
 }

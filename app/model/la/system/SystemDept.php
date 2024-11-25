@@ -10,12 +10,9 @@
  * Official Website: http://www.madong.cn
  */
 
-namespace app\model\system;
+namespace app\model\la\system;
 
-use madong\basic\BaseTpORMModel;
-use madong\trait\ModelTrait;
-use madong\trait\SnowflakeIdTrait;
-use think\model\concern\SoftDelete;
+use madong\basic\BaseLaORMModel;
 
 /**
  * 部门模型
@@ -23,7 +20,7 @@ use think\model\concern\SoftDelete;
  * @author Mr.April
  * @since  1.0
  */
-class SystemDept extends BaseTpORMModel
+class SystemDept extends BaseLaORMModel
 {
 
     /**
@@ -31,16 +28,10 @@ class SystemDept extends BaseTpORMModel
      *
      * @var string
      */
-    protected $pk = 'id';
+    protected $primaryKey = 'id';
 
-    protected $name = 'system_dept';
+    protected $table = 'system_dept';
 
-//    protected $deleteTime = 'delete_time';
-//    protected $defaultSoftDelete = null;
-
-    protected $createTime = 'create_time';
-    protected $updateTime = 'update_time';
-    protected $autoWriteTimestamp = true;
 
     /**
      * 部门名称-搜索器
@@ -48,14 +39,14 @@ class SystemDept extends BaseTpORMModel
      * @param $query
      * @param $value
      */
-    public function searchNameAttr($query, $value)
+    public function scopeName($query, $value)
     {
         if (!empty($value)) {
             $query->where('name', 'like', $value . '%');
         }
     }
 
-    public function searchPidAttr($query, $value)
+    public function scopePid($query, $value)
     {
         if (!empty($value)) {
             if (is_string($value)) {
@@ -75,16 +66,16 @@ class SystemDept extends BaseTpORMModel
      * @param $query
      * @param $value
      */
-    public function searchStatusAttr($query, $value)
+    public function scopeStatus($query, $value)
     {
         if ($value !== '') {
             $query->where('status', $value);
         }
     }
 
-    public function leader(): \think\model\relation\BelongsToMany
+    public function leader(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
-        return $this->belongsToMany(SystemUser::class, SystemDeptLeader::class, 'user_id', 'dept_id');
+        return $this->belongsToMany(SystemUser::class, 'system_dept_leader', 'dept_id', 'user_id');
     }
 
 }

@@ -12,7 +12,6 @@
 
 namespace app\dao\system;
 
-use app\model\system\SystemOperateLog;
 use madong\basic\BaseDao;
 
 /**
@@ -26,6 +25,8 @@ class SystemOperateLogDao extends BaseDao
 
     protected function setModel(): string
     {
-        return SystemOperateLog::class;
+                return config('app.model_type') === 'laravelORM'
+            ? 'app\\model\\la\\system\\SystemOperateLog'
+            : 'app\\model\\tp\\system\\SystemOperateLog';
     }
 }

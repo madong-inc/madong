@@ -12,7 +12,6 @@
 
 namespace app\dao\system;
 
-use app\model\system\SystemMenu;
 use madong\basic\BaseDao;
 
 class SystemMenuDao extends BaseDao
@@ -20,6 +19,8 @@ class SystemMenuDao extends BaseDao
 
     protected function setModel(): string
     {
-        return SystemMenu::class;
+                return config('app.model_type') === 'laravelORM'
+            ? 'app\\model\\la\\system\\SystemMenu'
+            : 'app\\model\\tp\\system\\SystemMenu';
     }
 }

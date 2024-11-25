@@ -12,7 +12,6 @@
 
 namespace app\dao\system;
 
-use app\model\system\SystemRole;
 use madong\basic\BaseDao;
 
 class SystemRoleDao extends BaseDao
@@ -20,6 +19,8 @@ class SystemRoleDao extends BaseDao
 
     protected function setModel(): string
     {
-        return SystemRole::class;
+                return config('app.model_type') === 'laravelORM'
+            ? 'app\\model\\la\\system\\SystemRole'
+            : 'app\\model\\tp\\system\\SystemRole';
     }
 }

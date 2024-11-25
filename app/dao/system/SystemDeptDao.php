@@ -12,7 +12,6 @@
 
 namespace app\dao\system;
 
-use app\model\system\SystemDept;
 use madong\basic\BaseDao;
 
 class SystemDeptDao extends BaseDao
@@ -20,6 +19,8 @@ class SystemDeptDao extends BaseDao
 
     protected function setModel(): string
     {
-        return SystemDept::class;
+        return config('app.model_type') === 'laravelORM'
+            ? 'app\\model\\la\\system\\SystemDept'
+            : 'app\\model\\tp\\system\\SystemDept';
     }
 }

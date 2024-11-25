@@ -2,13 +2,10 @@
 
 namespace app\event;
 
-use app\model\system\SystemMenu;
 use app\services\system\SystemLoginLogService;
 use app\services\system\SystemMenuService;
 use app\services\system\SystemOperateLogService;
-use Jenssegers\Agent\Agent;
 use support\Container;
-use support\Request;
 
 class UserActionLogEvent
 {

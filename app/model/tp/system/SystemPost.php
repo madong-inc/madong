@@ -9,19 +9,19 @@
  *+------------------
  * Official Website: http://www.madong.cn
  */
-
-namespace app\model\system;
+namespace app\model\tp\system;
 
 use madong\basic\BaseTpORMModel;
 
 /**
- * 附件模型
+ * 岗位模型
  *
  * @author Mr.April
  * @since  1.0
  */
-class SystemRecycleBin extends BaseTpORMModel
+class SystemPost extends BaseTpORMModel
 {
+
 
     /**
      * 数据表主键
@@ -30,10 +30,6 @@ class SystemRecycleBin extends BaseTpORMModel
      */
     protected $pk = 'id';
 
-    protected $name = 'system_recycle_bin';
+    protected $name = 'system_post';
 
-    public function operate(): \think\model\relation\hasOne
-    {
-        return $this->hasOne(SystemUser::class, 'id', 'operate_id')->bind(['operate_name' => 'real_name']);
-    }
 }

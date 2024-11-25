@@ -26,7 +26,7 @@ return [
     'runtime_path'             => base_path(false) . DIRECTORY_SEPARATOR . 'runtime',
     'controller_suffix'        => 'Controller',
     'controller_reuse'         => false,
-    'model_type'               => 'thinkORM',//thinkORM||laravelORM
+    'model_type'               => 'laravelORM',//thinkORM||laravelORM
     'store_in_recycle_bin'     => true,//是否开启回站模式
     'exclude_from_recycle_bin' => ['system_login_log', 'system_operate_log','system_recycle_bin'],//排除的表
 ];

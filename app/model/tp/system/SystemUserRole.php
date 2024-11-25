@@ -9,7 +9,7 @@
  *+------------------
  * Official Website: http://www.madong.cn
  */
-namespace app\model\system;
+namespace app\model\tp\system;
 
 use think\model\Pivot;
 

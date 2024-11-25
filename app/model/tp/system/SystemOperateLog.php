@@ -9,10 +9,9 @@
  *+------------------
  * Official Website: http://www.madong.cn
  */
-namespace app\model\system;
+namespace app\model\tp\system;
 
 use madong\basic\BaseTpORMModel;
-
 
 class SystemOperateLog extends BaseTpORMModel
 {

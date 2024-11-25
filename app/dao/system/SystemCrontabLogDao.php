@@ -12,8 +12,6 @@
 
 namespace app\dao\system;
 
-
-use app\model\system\SystemCrontabLog;
 use madong\basic\BaseDao;
 
 class SystemCrontabLogDao extends BaseDao
@@ -21,6 +19,8 @@ class SystemCrontabLogDao extends BaseDao
 
     protected function setModel(): string
     {
-        return SystemCrontabLog::class;
+        return config('app.model_type') === 'laravelORM'
+            ? 'app\\model\\la\\system\\SystemCrontabLog'
+            : 'app\\model\\tp\\system\\SystemCrontabLog';
     }
 }
