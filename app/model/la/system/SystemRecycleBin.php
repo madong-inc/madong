@@ -13,7 +13,7 @@ class SystemRecycleBin extends BaseLaORMModel
      */
     protected $pk = 'id';
 
-    protected $name = 'system_recycle_bin';
+    protected $table = 'system_recycle_bin';
 
     public function operate():\Illuminate\Database\Eloquent\Relations\HasOne
     {
