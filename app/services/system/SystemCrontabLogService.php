@@ -18,6 +18,10 @@ use support\Container;
 
 class SystemCrontabLogService extends BaseService
 {
+    /**
+     * @var SystemCrontabLogDao $dao
+     */
+    public $dao;
     public function __construct()
     {
         $this->dao = Container::make(SystemCrontabLogDao::class);
