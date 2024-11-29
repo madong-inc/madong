@@ -13,8 +13,10 @@
 namespace app\services\system;
 
 use app\dao\system\SystemUserDao;
-use app\model\tp\system\SystemMenu;
-use app\model\tp\system\SystemUser;
+use app\model\tp\system\SystemMenu as TpSystemMenu;
+use app\model\la\system\SystemMenu as LaSystemMenu;
+use app\model\tp\system\SystemUser as TpSystemUser;
+use app\model\la\system\SystemUser as LaSystemUser;
 use madong\basic\BaseService;
 use madong\exception\AuthException;
 use madong\services\cache\CacheService;
@@ -131,14 +133,14 @@ class SystemAuthService extends BaseService
         if ($list instanceof \Illuminate\Database\Eloquent\Collection) {
             foreach ($list as $item) {
                 $item->set('name', $item->code);
-                $item->set('meta', SystemMenu::getMetaAttribute($item));
+                $item->set('meta', LaSystemMenu::getMetaAttribute($item));
             }
             $list->makeVisible(['id', 'pid', 'type', 'sort', 'redirect', 'path', 'name', 'meta', 'component']);
         } else {
             //默认tp模型
             foreach ($list as $item) {
                 $item->set('name', $item->getData('code'));
-                $item->set('meta', $item->meta);
+                $item->set('meta', TpSystemMenu::getMetaAttribute($item));
             }
             $list->visible(['id', 'pid', 'type', 'sort', 'redirect', 'path', 'name', 'meta', 'component']);
         }
@@ -305,11 +307,11 @@ class SystemAuthService extends BaseService
     /**
      * 获取头像
      *
-     * @param \app\model\tp\system\SystemUser $adminInfo
+     * @param TpSystemUser|LaSystemUser $adminInfo
      *
      * @return string
      */
-    private function getAvatarUrl(SystemUser $adminInfo): string
+    private function getAvatarUrl(TpSystemUser|LaSystemUser $adminInfo): string
     {
         /**@var SystemConfigService  $systemConfigService */
         $systemConfigService = Container::make(SystemConfigService::class);
