@@ -131,16 +131,12 @@ class SystemAuthService extends BaseService
         $list  = $systemMenuService->dao->selectList($where, '*', 0, 0, 'sort asc', [], true);
         //兼容LaORM
         if ($list instanceof \Illuminate\Database\Eloquent\Collection) {
-            foreach ($list as $item) {
-                $item->set('name', $item->code);
-                $item->set('meta', LaSystemMenu::getMetaAttribute($item));
-            }
             $list->makeVisible(['id', 'pid', 'type', 'sort', 'redirect', 'path', 'name', 'meta', 'component']);
         } else {
             //默认tp模型
             foreach ($list as $item) {
                 $item->set('name', $item->getData('code'));
-                $item->set('meta', TpSystemMenu::getMetaAttribute($item));
+                $item->set('meta', $item->meta);
             }
             $list->visible(['id', 'pid', 'type', 'sort', 'redirect', 'path', 'name', 'meta', 'component']);
         }

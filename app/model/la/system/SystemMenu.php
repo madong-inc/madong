@@ -12,6 +12,7 @@
 
 namespace app\model\la\system;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use madong\basic\BaseLaORMModel;
 
 /**
@@ -27,6 +28,7 @@ class SystemMenu extends BaseLaORMModel
 
     protected $primaryKey = 'id';
 
+    protected $appends=['name','meta'];
     /**
      * 菜单meta属性
      *
@@ -34,37 +36,43 @@ class SystemMenu extends BaseLaORMModel
      *
      * @return array
      */
-    public static function getMetaAttribute($data): array
+    public  function getMetaAttribute()
     {
         // 1.构建mate数组
         $newData = [
-            'icon'                     => $data['icon'] ?? '',
-            'title'                    => $data['title'] ?? '',
+            'icon'                     => $this['icon'] ?? '',
+            'title'                    => $this['title'] ?? '',
             'menuVisibleWithForbidden' => true,
         ];
 
         // 2.添加fixed锁定菜单标记
-        if (isset($data['is_affix']) && ($data['is_affix'] === 1 || $data['is_affix'] === '1')) {
+        if (isset($this['is_affix']) && ($this['is_affix'] === 1 || $this['is_affix'] === '1')) {
             $newData['order']    = -1;
             $newData['affixTab'] = true;
         }
 
         // 3.是否隐藏菜单
-        if (isset($data['is_show']) && $data['is_show'] == 0) {
+        if (isset($this['is_show']) && $this['is_show'] == 0) {
             $newData['hideInMenu'] = true;
         }
 
         // 4.是否缓存
-        if (isset($data['is_cache']) && $data['is_cache'] == 1) {
+        if (isset($this['is_cache']) && $this['is_cache'] == 1) {
             $newData['keepAlive'] = true;
         }
 
         //5.是否外链在新窗口打开
-        if (isset($data['open_type']) && $data['open_type'] == 1) {
+        if (isset($this['open_type']) && $this['open_type'] == 1) {
             $newData['link'] = true;
         }
         // 更多参数可以在这边添加
+
         return $newData;
+    }
+
+    public function getNameAttribute()
+    {
+        return $this->code;
     }
 
     /**
