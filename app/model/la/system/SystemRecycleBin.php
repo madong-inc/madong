@@ -15,8 +15,20 @@ class SystemRecycleBin extends BaseLaORMModel
 
     protected $table = 'system_recycle_bin';
 
+    protected $appends = ['operate_name'];
+
+    /**
+     * 定义访问器
+     *
+     * @return null
+     */
+    public function getOperateNameAttribute(): mixed
+    {
+        return $this->operate ? $this->operate->real_name : null;
+    }
+
     public function operate():\Illuminate\Database\Eloquent\Relations\HasOne
     {
-        return $this->hasOne(SystemUser::class, 'id', 'operate_id')->bind(['operate_name' => 'real_name']);
+        return $this->hasOne(SystemUser::class, 'id', 'operate_id')->select(['id', 'real_name']);
     }
 }
