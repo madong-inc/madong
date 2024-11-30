@@ -117,7 +117,7 @@ class BaseLaORMModel extends Model
      */
     public function getData(string $field): mixed
     {
-        return $this->attributes[$field] ?? null;
+        return $this->{$field}??null;
     }
 
     /**
