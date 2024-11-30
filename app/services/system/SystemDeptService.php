@@ -13,7 +13,8 @@
 namespace app\services\system;
 
 use app\dao\system\SystemDeptDao;
-use app\model\tp\system\SystemDept;
+use app\model\tp\system\SystemDept as TpSystemDept;
+use app\model\la\system\SystemDept as LaSystemDept;
 use madong\basic\BaseService;
 use madong\exception\AdminException;
 use support\Container;
@@ -89,9 +90,9 @@ class SystemDeptService extends BaseService
      *
      * @param $id
      *
-     * @return \app\model\tp\system\SystemDept|null
+     * @return TpSystemDept | LaSystemDept
      */
-    public function get($id): ?SystemDept
+    public function get($id)
     {
         $model = $this->dao->get($id, ['*'], ['leader']);
         if (!empty($model)) {
