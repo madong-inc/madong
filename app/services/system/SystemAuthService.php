@@ -129,7 +129,7 @@ class SystemAuthService extends BaseService
     {
         /**@var SystemMenuService  $systemMenuService */
         $systemMenuService = Container::make(SystemMenuService::class);
-        $list  = $systemMenuService->dao->selectList($where, '*', 0, 0, 'sort asc', [], true);
+        $list  = $systemMenuService->selectList($where, '*', 0, 0, 'sort asc', [], true);
         //兼容LaORM
         if ($list instanceof \Illuminate\Database\Eloquent\Collection) {
             $list->makeVisible(['id', 'pid', 'type', 'sort', 'redirect', 'path', 'name', 'meta', 'component']);
