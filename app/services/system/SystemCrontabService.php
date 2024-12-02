@@ -45,7 +45,7 @@ class SystemCrontabService extends BaseService
                 foreach ($result as $item) {
                     // 设置最后运行时间
                     $item->last_running_time = $item->getData('last_running_time')
-                        ? date('Y-m-d H:i:s', $item->getData('last_running_time'))
+                        ? date('Y-m-d H:i:s',strtotime( $item->getData('last_running_time')))
                         : null;
                     // 获取相关日志并设置到项中
                     $item->log = $item->getData('log');
