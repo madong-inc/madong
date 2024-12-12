@@ -29,7 +29,7 @@ class LaravelORMFactory
     public function count(array $where = [], bool $search = true): int
     {
         return $this->getModel()->when($search, function ($query) use ($where) {
-            return $this->search($query, $where);
+            $query->where($where);
         })->count();
     }
 
