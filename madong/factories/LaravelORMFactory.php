@@ -16,22 +16,29 @@ class LaravelORMFactory
     {
         $this->model = $model;
     }
-
     /**
-     * 获取条数
-     *
-     * @param array $where
-     * @param bool  $search
-     *
-     * @return int
-     * @throws \Exception
-     */
-    public function count(array $where = [], bool $search = true): int
+    * 获取条数
+    *
+    * @param array $where
+    * @param bool  $search
+    *
+    * @return int
+    * @throws \Exception
+    */
+    public function count(array $where = [], bool $search = false): int
     {
-        return $this->getModel()->when($search, function ($query) use ($where) {
-            $query->where($where);
-        })->count();
+        // 获取查询构建器实例
+        $query = $this->getModel()->query();
+        if ($search) {
+            $query = $this->search($where); // search 返回的是一个查询构建器
+        } else {
+            $query->where($where); // 应用 where 条件
+        }
+
+        // 返回满足条件的记录数量
+        return $query->count();
     }
+
 
     /**
      * 查询列表
