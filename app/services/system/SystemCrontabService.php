@@ -59,7 +59,7 @@ class SystemCrontabService extends BaseService
             foreach ($result as $item) {
                 $item->rule_name .= '';
                 $item->set('last_running_time', date('Y-m-d H:i:s', $item->getData('last_running_time')));
-                $item->logs = $systemCrontabLogService->dao->getModel()
+                $item->logs = $systemCrontabLogService->getModel()
                     ->where(['crontab_id' => $item->id])
                     ->order('create_time', 'desc')
                     ->find();

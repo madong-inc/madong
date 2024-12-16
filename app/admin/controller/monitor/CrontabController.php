@@ -108,4 +108,21 @@ class CrontabController extends Crud
             return Json::fail($e->getMessage(), [], $e->getCode());
         }
     }
+
+    public function update(Request $request): Response
+    {
+        try {
+            $id   = $request->route->param('id');
+            $data = $this->inputFilter($request->all(),['month','week','day','hour','minute','second']);
+            if (isset($this->validate) && $this->validate) {
+                if (!$this->validate->scene('update')->check($data)) {
+                    throw new Exception($this->validate->getError());
+                }
+            }
+            $this->service->update($id, $data);
+            return $this->success('ok', []);
+        } catch (Throwable $e) {
+            return $this->fail($e->getMessage());
+        }
+    }
 }
