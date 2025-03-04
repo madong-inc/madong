@@ -335,7 +335,7 @@ class Crud extends Base
     protected function inputFilter(array $data, array $skipKeys = []): array
     {
         $model   = $this->service->getModel();
-        $columns = $model->getTableFields();
+        $columns = $model->getFields();
 
         foreach ($data as $col => $item) {
             // 检查是否在跳过的键中，或者不在列中

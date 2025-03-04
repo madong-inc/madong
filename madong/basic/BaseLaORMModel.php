@@ -241,8 +241,8 @@ class BaseLaORMModel extends Model
     private static function setCreatedBy(Model $model): void
     {
         $uid = getCurrentUser();
-        if ($uid && $model->isFillable('create_by')) {
-            $model->setAttribute('create_by', $uid);
+        if ($uid && $model->isFillable('created_by')) {
+            $model->setAttribute('created_by', $uid);
         }
     }
 
@@ -256,8 +256,8 @@ class BaseLaORMModel extends Model
     private static function setUpdatedBy(Model $model): void
     {
         $uid = getCurrentUser();
-        if ($uid && $model->isFillable('update_by')) {
-            $model->setAttribute('update_by', $uid);
+        if ($uid && $model->isFillable('updated_by')) {
+            $model->setAttribute('updated_by', $uid);
         }
     }
 
