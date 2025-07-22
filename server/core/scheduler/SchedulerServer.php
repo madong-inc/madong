@@ -33,6 +33,7 @@ class SchedulerServer
 
     /**
      * Redis
+     *
      * @var \Workerman\RedisQueue\Client|null
      */
     protected \Workerman\RedisQueue\Client|null $redis;
@@ -92,7 +93,13 @@ class SchedulerServer
         $config         = config('core.scheduler.app');
         $this->debug    = $config['debug'] ?? true;
         $this->writeLog = $config['write_log'] ?? true;
-        $this->enabled   = $config['enable'] ?? false;
+        $this->enabled  = $config['enable'] ?? false;
+
+        // 没有安装跳出运行
+        if (!is_file(base_path() . '/install.lock')) {
+            return false;
+        }
+
         if (!$this->enabled) {
             $this->writeln('定时任务未开启，如需开启，请修改配置 .env APP_TASK_ENABLED=true 或者config\\core\\scheduler\\app.php. enable = true ');
             return false;
@@ -250,7 +257,7 @@ class SchedulerServer
             try {
                 $systemCrontabService = Container::make(SysCrontabService::class);
                 $reData               = $systemCrontabService->runOneTask($data['id']);
-                $this->writeln( $data['title'].' 任务#' . $data['id'] . ' ' . $data['rule'] . ' ' . $data['target'], $reData['code']);
+                $this->writeln($data['title'] . ' 任务#' . $data['id'] . ' ' . $data['rule'] . ' ' . $data['target'], $reData['code']);
                 $this->isSingleton($data);
             } finally {
                 // 释放锁

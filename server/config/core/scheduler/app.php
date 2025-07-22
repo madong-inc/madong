@@ -16,7 +16,7 @@ use core\scheduler\event\ShellTask;
 use core\scheduler\event\UrlTask;
 
 return [
-    'enable'      => env('APP_TASK_ENABLED', true),// 是否启用定时器  修改此参数后，需要重启
+    'enable'      => env('APP_TASK_ENABLED', false),// 是否启用定时器  修改此参数后，需要重启
     'debug'       => config('app.debug'),
     'write_log'   => false,
     'listen'      => '127.0.0.1:' . '2337',// 注意此端口用于任务通讯，一个项目一个端口，请勿占用
