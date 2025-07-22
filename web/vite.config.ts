@@ -56,7 +56,7 @@ export default defineConfig(async () => {
           '/api': {
             changeOrigin: true,
             rewrite: (path) => path.replace(/^\/api/, ''),
-            target: env.VITE_AXIOS_BASE_URL || 'http://127.0.0.1:88998',
+            target: env.VITE_AXIOS_BASE_URL || 'http://127.0.0.1:8899',
             ws: true
           }
         },

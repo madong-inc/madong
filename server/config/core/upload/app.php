@@ -7,6 +7,7 @@ use core\upload\storage\Qiniu;
 use core\upload\storage\S3;
 
 return [
+    'enable'          => true,
     'debug'           => config('app.debug'),
     'cdn_url'         => '',
     'cdn_url_params'  => '',
