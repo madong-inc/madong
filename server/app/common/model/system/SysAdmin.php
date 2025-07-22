@@ -49,6 +49,7 @@ class SysAdmin extends BaseModel
         'nick_name',
         'password',
         'is_super',
+        'is_tenant_admin',
         'mobile_phone',
         'email',
         'avatar',

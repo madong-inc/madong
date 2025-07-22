@@ -43,6 +43,7 @@ class TenantMemberService extends BaseService
      * @param array $data
      *
      * @return SysAdmin|null
+     * @throws \core\exception\handler\AdminException
      */
     public function save(array $data): SysAdmin|null
     {
@@ -52,9 +53,10 @@ class TenantMemberService extends BaseService
                 $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
                 unset($data['role_id_list'], $data['post_id_list'], $data['dept_id']);
                 //中间表模型不会自动创建时间戳手动添加
-                $data['created_at'] = time();
-                $data['updated_at'] = time();
-                $model              = $this->dao->save($data);
+                $data['created_at']      = time();
+                $data['updated_at']      = time();
+                $data['is_tenant_admin'] = 1;//标识租户管理员
+                $model                   = $this->dao->save($data);
                 //创建关联租户
                 $adminTenant = [
                     'admin_id'   => $model->id,
@@ -86,6 +88,7 @@ class TenantMemberService extends BaseService
      * @param array $data
      *
      * @return \app\common\model\system\SysAdmin|null
+     * @throws \core\exception\handler\AdminException
      */
     public function update(int $id, array $data): ?SysAdmin
     {

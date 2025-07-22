@@ -212,16 +212,17 @@ class Index
             $dataImporterService->importData($pdo, 'ma_sys_config', $field, $configuration);
             //2.6 导入管理员数据
             $data  = [[
-                          'id'         => (int)1,
-                          'user_name'  => $username,
-                          'password'   => password_hash($password, PASSWORD_DEFAULT),
-                          'real_name'  => '超级管理员',
-                          'nick_name'  => '超级管理员',
-                          'is_super'   => 1,//超级管理员标识
-                          'created_at' => time(),
-                          'updated_at' => time(),
+                          'id'              => (int)1,
+                          'user_name'       => $username,
+                          'password'        => password_hash($password, PASSWORD_DEFAULT),
+                          'real_name'       => '超级管理员',
+                          'nick_name'       => '超级管理员',
+                          'is_super'        => 1,//超级管理员标识
+                          'is_tenant_admin' => 1,//租户管理员标识
+                          'created_at'      => time(),
+                          'updated_at'      => time(),
                       ]];
-            $field = ['id', 'user_name', 'real_name', 'nick_name', 'password', 'is_super', 'mobile_phone', 'email', 'avatar', 'signed', 'dashboard', 'dept_id', 'enabled', 'login_ip', 'login_time', 'backend_setting', 'created_by', 'updated_by', 'created_at', 'updated_at', 'deleted_at', 'sex', 'remark', 'birthday', 'tel', 'is_locked'];
+            $field = ['id', 'user_name', 'real_name', 'nick_name', 'password', 'is_super','is_tenant_admin', 'mobile_phone', 'email', 'avatar', 'signed', 'dashboard', 'dept_id', 'enabled', 'login_ip', 'login_time', 'backend_setting', 'created_by', 'updated_by', 'created_at', 'updated_at', 'deleted_at', 'sex', 'remark', 'birthday', 'tel', 'is_locked'];
             $dataImporterService->importData($pdo, 'ma_sys_admin', $field, $data);
             //2.7 导入管理员关联租户数据
             $data  = [[

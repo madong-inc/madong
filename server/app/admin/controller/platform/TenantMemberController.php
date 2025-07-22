@@ -68,7 +68,6 @@ class TenantMemberController extends Crud
                 'value' => $item->id,
             ];
         }
-        var_dump(88);
         return Json::success('ok', $formatted_items);
     }
 
