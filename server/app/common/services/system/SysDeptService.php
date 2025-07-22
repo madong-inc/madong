@@ -20,9 +20,9 @@ use support\Container;
 class SysDeptService extends BaseService
 {
 
-    public function __construct(SysDeptDao $dao)
+    public function __construct()
     {
-        $this->dao = $dao;
+        $this->dao = Container::make(SysDeptDao::class);
     }
 
     /**

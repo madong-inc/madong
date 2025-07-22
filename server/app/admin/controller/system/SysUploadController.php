@@ -16,16 +16,17 @@ use app\admin\controller\Crud;
 use app\common\services\system\SysUploadService;
 use core\exception\handler\AdminException;
 use core\utils\Json;
+use support\Container;
 use support\Request;
 use Webman\RedisQueue\Client;
 
 class SysUploadController extends Crud
 {
 
-    public function __construct(SysUploadService $service)
+    public function __construct()
     {
         parent::__construct();
-        $this->service = $service;
+        $this->service = Container::make(SysUploadService::class);
     }
 
     /**

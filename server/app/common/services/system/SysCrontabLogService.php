@@ -14,11 +14,12 @@ namespace app\common\services\system;
 
 use app\common\dao\system\SysCrontabLogDao;
 use core\abstract\BaseService;
+use support\Container;
 
 class SysCrontabLogService extends BaseService
 {
-    public function __construct(SysCrontabLogDao $dao)
+    public function __construct()
     {
-        $this->dao = $dao;
+        $this->dao = Container::make(SysCrontabLogDao::class);
     }
 }

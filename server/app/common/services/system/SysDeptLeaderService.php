@@ -14,6 +14,7 @@ namespace app\common\services\system;
 
 use app\common\dao\system\SysDeptLeaderDao;
 use core\abstract\BaseService;
+use support\Container;
 
 /**
  * @author Mr.April
@@ -22,9 +23,9 @@ use core\abstract\BaseService;
 class SysDeptLeaderService extends BaseService
 {
 
-    public function __construct(SysDeptLeaderDao $dao)
+    public function __construct()
     {
-        $this->dao = $dao;
+        $this->dao = Container::make(SysDeptLeaderDao::class);
     }
 
 }

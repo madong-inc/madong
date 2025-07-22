@@ -21,8 +21,6 @@ use core\abstract\BaseService;
 use core\casbin\Permission;
 use core\context\TenantContext;
 use core\enum\system\PolicyPrefix;
-use core\exceptioncopy\AuthException;
-use madong\admin\services\jwt\JwtAuth;
 use madong\interface\IDict;
 use support\Container;
 

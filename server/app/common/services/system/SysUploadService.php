@@ -23,9 +23,9 @@ class SysUploadService extends BaseService
 {
 
 
-    public function __construct(SysUploadDao $dao)
+    public function __construct()
     {
-        $this->dao = $dao;
+        $this->dao = Container::make(SysUploadDao::class);
     }
 
     /**
@@ -139,12 +139,14 @@ class SysUploadService extends BaseService
                 if (empty($baseConfig)) {
                     throw new AdminException('缺少上传配置信息');
                 }
+
                 $type = Arr::fetchConfigValue($baseConfig, 'mode') ?: 'local';//上次模式默认本地
                 if ($isLocal) {
                     $type = 'local';
                 }
 
                 $result = UploadFile::uploadFile();
+
                 $data   = $result[0];
                 $hash   = $data['unique_id'];
 
@@ -172,6 +174,7 @@ class SysUploadService extends BaseService
                 return $this->dao->save($inData);
             });
         } catch (\Exception $e) {
+            var_dump($e);
             throw new AdminException($e->getMessage());
         }
     }

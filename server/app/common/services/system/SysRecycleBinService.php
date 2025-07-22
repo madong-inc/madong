@@ -18,6 +18,7 @@ use app\common\scopes\global\TenantScope;
 use core\exception\handler\AdminException;
 use core\abstract\BaseService;
 use core\context\TenantContext;
+use support\Container;
 use support\Db;
 
 /**
@@ -29,9 +30,9 @@ use support\Db;
 class SysRecycleBinService extends BaseService
 {
 
-    public function __construct(SysRecycleBinDao $dao)
+    public function __construct()
     {
-        $this->dao = $dao;
+        $this->dao = Container::make(SysRecycleBinDao::class);
     }
 
     /**

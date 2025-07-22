@@ -25,7 +25,6 @@ use core\context\TenantContext;
 use core\enum\system\PolicyPrefix;
 use core\exception\handler\AdminException;
 use core\jwt\JwtToken;
-use madong\admin\services\jwt\JwtAuth;
 use support\Container;
 use Webman\Event\Event;
 

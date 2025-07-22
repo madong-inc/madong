@@ -15,6 +15,7 @@ namespace app\common\services\system;
 
 use app\common\dao\system\SysTenantMenuDao;
 use core\abstract\BaseService;
+use support\Container;
 
 /**
  * @method save(array $data)
@@ -22,9 +23,9 @@ use core\abstract\BaseService;
 class SysTenantMenuService extends BaseService
 {
 
-    public function __construct(SysTenantMenuDao $dao)
+    public function __construct()
     {
-        $this->dao = $dao;
+        $this->dao = Container::make(SysTenantMenuDao::class);
     }
 
     /**

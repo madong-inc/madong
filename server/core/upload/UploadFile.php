@@ -20,7 +20,7 @@ class UploadFile
 
     protected static function init(): void
     {
-        $configAllowStorage = config('upload.adapter_classes');
+        $configAllowStorage = config('core.upload.app.adapter_classes');
         self::$allowStorage = array_unique(array_merge([
             'local',
             'oss',
@@ -82,7 +82,7 @@ class UploadFile
             throw new UploadException("不支持的存储类型:" . $adapter);
         }
         $config = array_merge($defaultConfig, $adapterConfig, ['_is_file_upload' => $is_file_upload]);
-        $handle = config('upload.adapter_classes.' . $adapter);
+        $handle = config('core.upload.app.adapter_classes.' . $adapter);
         if (!$handle) {
             throw new UploadException("未找到适配器处理器:" . $handle);
         }

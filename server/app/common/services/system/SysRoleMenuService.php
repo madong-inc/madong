@@ -15,6 +15,7 @@ namespace app\common\services\system;
 use app\common\dao\system\SysRoleMenuDao;
 use core\exception\handler\AdminException;
 use core\abstract\BaseService;
+use support\Container;
 
 /**
  * @method getColumn(int[]|string[] $array, string $string)
@@ -22,9 +23,9 @@ use core\abstract\BaseService;
 class SysRoleMenuService extends BaseService
 {
 
-    public function __construct(SysRoleMenuDao $dao)
+    public function __construct()
     {
-        $this->dao = $dao;
+        $this->dao = Container::make(SysRoleMenuDao::class);
     }
 
     /**
