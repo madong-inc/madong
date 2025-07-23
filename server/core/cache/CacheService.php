@@ -31,10 +31,10 @@ class CacheService
     {
         // 获取框架的 Redis 配置
         $options         = array_merge([
-            'host'     => '127.0.0.1',
-            'password' => null,
-            'port'     => 6379,
-            'database' => 0,
+            'host'     => config('redis.default.host', '127.0.0.1'),
+            'password' => config('redis.default.password', null),
+            'port'     => config('redis.default.port', 6379),
+            'database' => config('redis.default.database', 0),
         ], config('cache.custom.default', []));
         $this->adapter   = config('cache.custom.type', 'file');
         $this->prefix    = config('cache.custom.prefix', '');
@@ -54,6 +54,8 @@ class CacheService
             if (!empty($options['password'])) {
                 $this->redis->auth($options['password']);
             }
+            $database = $options['database'] ?? 0;
+            $this->redis->select($database);
             $this->cache = new RedisAdapter($this->redis, $this->namespace);
         } else {
             //默认file模式
