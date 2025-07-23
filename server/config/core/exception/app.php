@@ -6,13 +6,13 @@ return [
     'handler' => [
         // 不需要记录错误日志
         'dont_report' => [
-            core\exceptioncopy\handler\AccessDeniedHttpException::class,
-            core\exceptioncopy\handler\BadRequestHttpException::class,
-            core\exceptioncopy\handler\ForbiddenHttpException::class,
-            core\exceptioncopy\handler\NotFoundHttpException::class,
-            core\exceptioncopy\handler\ServerErrorHttpException::class,
-            core\exceptioncopy\handler\TooManyRequestsHttpException::class,
-            core\exceptioncopy\handler\UnauthorizedHttpException::class,
+            core\exception\handler\AccessDeniedHttpException::class,
+            core\exception\handler\BadRequestHttpException::class,
+            core\exception\handler\ForbiddenHttpException::class,
+            core\exception\handler\NotFoundHttpException::class,
+            core\exception\handler\ServerErrorHttpException::class,
+            core\exception\handler\TooManyRequestsHttpException::class,
+            core\exception\handler\UnauthorizedHttpException::class,
         ],
         // 自定义HTTP状态码
         'status'      => [

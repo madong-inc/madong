@@ -27,7 +27,7 @@ class Handler extends ExceptionHandler
 
     public function report(Throwable $exception)
     {
-        $this->dontReport = config('plugin.madong.exception.app.handler.dont_report', []);
+        $this->dontReport = config('core.exception.app.handler.dont_report', []);
         parent::report($exception);
     }
 
@@ -44,7 +44,7 @@ class Handler extends ExceptionHandler
 
     protected function initializeConfig(): void
     {
-        $this->config = array_merge($this->config, config('plugin.madong.exception.app.handler', []));
+        $this->config = array_merge($this->config, config('core.exception.app.handler', []));
     }
 
     protected function addRequestInfoToResponse(Request $request): void
@@ -105,11 +105,6 @@ class Handler extends ExceptionHandler
             case $e instanceof \InvalidArgumentException:
                 $this->statusCode = $status['invalid_argument'] ?? 415;
                 $this->errorMessage = '预期参数配置异常：' . $e->getMessage();
-                break;
-            case $e instanceof DbException || $e instanceof DataNotFoundException || $e instanceof ModelNotFoundException:
-                $this->statusCode = 500;
-                $this->errorMessage = 'Db：' . $e->getMessage();
-                $this->error = $e->getMessage();
                 break;
             case $e instanceof ServerErrorHttpException:
                 $this->statusCode = 500;
