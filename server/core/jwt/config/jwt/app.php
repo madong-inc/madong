@@ -48,5 +48,13 @@ return [
             $model   = $service->getAdminById($uid);
             return $model ? $model->toArray() : [];
         },
+        /** 是否启用黑名单 */
+        'blacklist_enabled'       => true,
+
+        /** 黑名单宽限期（秒） */
+        'blacklist_grace_period'  => 30,
+
+        /** 黑名单REDIS前缀 */
+        'cache_blacklist_pre'     => 'JWT:BLACKLIST:',
     ],
 ];

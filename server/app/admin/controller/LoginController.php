@@ -14,6 +14,7 @@ namespace app\admin\controller;
 
 use app\common\services\system\SysAdminService;
 use core\exception\handler\AdminException;
+use core\jwt\JwtToken;
 use core\utils\Json;
 use core\captcha\Captcha;
 use support\Container;
@@ -154,6 +155,7 @@ class LoginController extends Crud
      */
     public function logout(Request $request): \support\Response
     {
+        JwtToken::clear();
         return Json::success('ok', []);
     }
 

@@ -97,6 +97,42 @@ class RedisHandler
     }
 
     /**
+     * Adding a token leads to a blacklist
+     *
+     * @param string $prefix          Redis键前缀
+     * @param string $token           要加入黑名单的Token（支持原始Token或已MD5哈希的Token）
+     * @param int    $exp             过期时间(秒)
+     * @param bool   $isAlreadyHashed 标记Token是否已经是MD5格式
+     *
+     * @return bool
+     */
+    public static function addToBlacklist(
+        string $prefix,
+        string $token,
+        int    $exp,
+        bool   $isAlreadyHashed = false
+    ): bool
+    {
+        $key = $prefix . ($isAlreadyHashed ? $token : md5($token));
+        Redis::setEx($key, $exp, '1');
+        return true;
+    }
+
+    /**
+     * Check if the token has a black name
+     *
+     * @param string $prefix
+     * @param string $token
+     *
+     * @return bool
+     */
+    public static function isInBlacklist(string $prefix, string $token): bool
+    {
+        $key = $prefix . md5($token);
+        return (bool)Redis::get($key);
+    }
+
+    /**
      * Build consistent cache key
      *
      * @param string $prefix

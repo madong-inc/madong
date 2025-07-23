@@ -511,6 +511,7 @@ class SysAdminService extends BaseService
                 ->where('token', $token)
                 ->delete();
             JwtToken::clear();
+            JwtToken::addToBlacklist($token, true);//避免滥用添加到黑名单
         });
     }
 
