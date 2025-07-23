@@ -1,88 +1,334 @@
-中文 | [English](./README-en.md)
-# 项目概述
-
-<p align="center">
-    <img src="https://madong.tech/app/kbase/upload/avatar/202503/67e75c135c1f.md.png" width="120" />
-</p>
-<p align="center">
-    <a href="https://www.madong.tech" target="_blank">官网</a> |
-    <a href="https://madong.tech/kbase/doc?name=md" target="_blank">文档</a> | 
-    <a href="https://admin.madong.tech" target="_blank">演示</a> |
-    <a href="https://www.workerman.net/doc/webman/" target="_blank">Webman官方文档</a> 
-</p>
 
 
-## 开源多租户Saas快速开发框架
-我们矢志破除假开源之迷障，倾力构筑一个集卓越、简约与美貌于一身的开源SaaS多租户云平台架构典范。坚守“取之于开源，回馈于开源”的初心，我们旨在为开发者们释放宝贵时间，让他们得以悠然享受生活的每一刻——无论是偷得浮生半日闲的惬意摸鱼，还是沉浸于知识海洋的自我提升；无论是温馨陪伴家人的幸福时光，还是挥洒汗水、强健体魄的健身之旅；亦或是邂逅灵魂伴侣、共绘人生画卷的美好际遇。
+[NO MAP]
 
 
-## 技术特性
-- ✅ 优雅布局系统：简洁界面+多套主题+导览模式，自由组合随心配
-- ✅ 企业级功能栈：开箱即用的SaaS/多租户/RBAC权限体系
-- ✅ 智能消息推送：基于WebSocket+Redis的分布式消息系统
-- ✅ 高效流量管控：完备的流量控制与黑名单机制
-- ✅ 模块化设计：核心工程+可选插件，不需要的组件直接删除即可
-
-## 性能表现
-⚡ 极致响应：2M网络环境下接口响应<300ms，普遍保持在10-150ms区间
-
-## 功能矩阵
-### 基础架构
-- 多租户体系：产品订阅、初始数据、独立数据源等企业级功能
-- 权限管理：完整的RBAC权限控制系统
-### 组织架构
-- 用户管理：系统操作者配置中心
-- 部门架构：树形组织管理，支持数据权限
-- 岗位管理：职务体系配置
-### 系统管理
-- 菜单权限：菜单/操作/按钮权限精细控制
-- 角色管理：菜单权限分配+数据范围划分
-- 字典系统：常用数据标准化维护
-### 监控审计
-- 通知公告：系统消息发布平台
-- 操作日志：完整记录正常与异常操作
-- 登录审计：包含异常登录监控
-### 设计哲学
-大道至简 —— 我们坚持：
-
-- 代码优雅简洁
-- 开发高效快捷
-- 架构清晰明了
-- 无论是前端还是后端开发，都能享受**"快就完事了"**的编程体验。
+### web/src/views/dev/gateway/whitelist/data.ts
+[NO MAP]
 
 
-## 环境需求
-为了确保系统的正常运行，请确保您的服务器环境满足以下要求：
-- PHP：版本需 >= 8.1，并开启以下扩展：
-- mbstring：用于多字节字符串处理。
-- json：支持JSON数据的编码和解码。
-- pdo：提供统一的数据库访问接口。
-- openssl：用于加密和解密操作，保障数据传输安全。
-- redis：支持Redis缓存和数据存储。
-- pcntl：用于多进程控制。
-- Mysql：版本需 >= 5.7，作为系统的主要数据库存储数据。
-- Redis：版本需 >= 4.0，用于缓存数据，提高系统性能。
-- Git：版本需 >= 2.x，方便代码的版本管理和协作开发。
-- Composer：版本需 >= 2.x，用于PHP依赖管理。
+### web/src/views/dev/gateway/whitelist/index.vue
+[NO MAP]
+
+### web/src/views/dev/gateway/whitelist/modules
+[NO MAP]
 
 
-## 体验地址
+### web/src/views/dev/terminal/index.vue
+[NO MAP]
 
-[体验地址](https://admin.madong.tech) https://admin.madong.tech
-- 账号：admin
-- 密码：123456
-期待您的使用和反馈，我们将不断优化和完善系统，为您提供更优质的服务。
+### web/src/views/dev/terminal/modules/terminal.vue
+[NO MAP]
 
-
-
-## 官方社区
-欢迎加入我们的官方社区交流互动<img src="https://svg.hamm.cn/badge.svg?key=QQ 频道&value= pd52261144"/>
+### web/src/views/dev/terminal/types.ts
+[NO MAP]
 
 
-## 共同交流
+### web/src/views/monitor/redis/index.vue
+[NO MAP]
 
-<img src="https://madong.tech/app/admin/upload/files/20250605/684160e45fcc.png" width="240" />
+### web/src/views/monitor/server/index.vue
+[NO MAP]
+
+### web/src/views/platform/db-setting/data.ts
+[NO MAP]
 
 
-## 加入我们
-欢迎加入技术交流群，与核心开发者直接沟通（扫码添加作者微信进群），共同打造更强大的开源企业级平台！
+### web/src/views/platform/db-setting/index.vue
+[NO MAP]
+
+### web/src/views/platform/tenant-member/data.ts
+[NO MAP]
+
+
+### web/src/views/platform/tenant-member/index.vue
+[NO MAP]
+
+### web/src/views/platform/tenant-member/modules/tenant-member-form.vue
+[NO MAP]
+
+### web/src/views/platform/tenant-member/modules/tenant-member-table.vue
+[NO MAP]
+
+### web/src/views/platform/tenant-subscription/data.ts
+[NO MAP]
+
+
+### web/src/views/platform/tenant-subscription/index.vue
+[NO MAP]
+
+### web/src/views/platform/tenant-subscription/modules/tenant-subscription-form.vue
+[NO MAP]
+
+### web/src/views/platform/tenant-subscription/modules/tenant-subscription-table.vue
+[NO MAP]
+
+### web/src/views/platform/tenant-subscription/modules/tenant-subscription.vue
+[NO MAP]
+
+### web/src/views/platform/tenant/data.ts
+[NO MAP]
+
+
+### web/src/views/platform/tenant/index.vue
+[NO MAP]
+
+### web/src/views/platform/tenant/modules/tenant-form.vue
+[NO MAP]
+
+### web/src/views/platform/tenant/modules/tenant-table.vue
+[NO MAP]
+
+### web/src/views/system/auth/data.ts
+[NO MAP]
+
+
+### web/src/views/system/auth/index.vue
+[NO MAP]
+
+### web/src/views/system/auth/modules/role-menu.vue
+[NO MAP]
+
+### web/src/views/system/auth/modules/role-scope.vue
+[NO MAP]
+
+### web/src/views/system/auth/modules/user-roles.vue
+[NO MAP]
+
+### web/src/views/system/config/data.ts
+[NO MAP]
+
+
+### web/src/views/system/config/index.vue
+[NO MAP]
+
+### web/src/views/system/config/modules/config-form.vue
+[NO MAP]
+
+### web/src/views/system/config/modules/config-table.vue
+[NO MAP]
+
+### web/src/views/system/dept/data.ts
+[NO MAP]
+
+
+### web/src/views/system/dept/index.vue
+[NO MAP]
+
+### web/src/views/system/dept/modules/dept-form.vue
+[NO MAP]
+
+### web/src/views/system/dept/modules/dept-table.vue
+[NO MAP]
+
+### web/src/views/system/dict/data.ts
+[NO MAP]
+
+
+### web/src/views/system/dict/index.vue
+[NO MAP]
+
+### web/src/views/system/dict/modules/dict-form.vue
+[NO MAP]
+
+### web/src/views/system/dict/modules/dict-table.vue
+[NO MAP]
+
+### web/src/views/system/dict/modules/dict-item-form.vue
+[NO MAP]
+
+### web/src/views/system/dict/modules/dict-item-table.vue
+[NO MAP]
+
+### web/src/views/system/files/data.ts
+[NO MAP]
+
+
+### web/src/views/system/files/index.vue
+[NO MAP]
+
+### web/src/views/system/files/modules/files-form.vue
+[NO MAP]
+
+### web/src/views/system/files/modules/files-table.vue
+[NO MAP]
+
+### web/src/views/system/logs/login/index.vue
+[NO MAP]
+
+### web/src/views/system/logs/operation/index.vue
+[NO MAP]
+
+### web/src/views/system/logs/operation/modules/operation-table.vue
+[NO MAP]
+
+### web/src/views/system/menu/data.ts
+[NO MAP]
+
+
+### web/src/views/system/menu/index.vue
+[NO MAP]
+
+### web/src/views/system/menu/modules/menu-form.vue
+[NO MAP]
+
+### web/src/views/system/menu/modules/menu-table.vue
+[NO MAP]
+
+### web/src/views/system/message/index.vue
+[NO MAP]
+
+### web/src/views/system/message/modules/message-form.vue
+[NO MAP]
+
+### web/src/views/system/message/modules/message-table.vue
+[NO MAP]
+
+### web/src/views/system/notice/index.vue
+[NO MAP]
+
+### web/src/views/system/notice/modules/notice-form.vue
+[NO MAP]
+
+### web/src/views/system/notice/modules/notice-table.vue
+[NO MAP]
+
+### web/src/views/system/recycle-bin/data.ts
+[NO MAP]
+
+
+### web/src/views/system/recycle-bin/index.vue
+[NO MAP]
+
+### web/src/views/system/recycle-bin/modules/recycle-bin-form.vue
+[NO MAP]
+
+### web/src/views/system/recycle-bin/modules/recycle-bin-table.vue
+[NO MAP]
+
+### web/src/views/system/role/data.ts
+[NO MAP]
+
+
+### web/src/views/system/role/index.vue
+[NO MAP]
+
+### web/src/views/system/role/modules/role-form.vue
+[NO MAP]
+
+### web/src/views/system/role/modules/role-table.vue
+[NO MAP]
+
+### web/src/views/system/rule/data.ts
+[NO MAP]
+
+
+### web/src/views/system/rule/index.vue
+[NO MAP]
+
+### web/src/views/system/rule/modules/rule-form.vue
+[NO MAP]
+
+### web/src/views/system/rule/modules/rule-table.vue
+[NO MAP]
+
+### web/src/views/system/user/account/data.ts
+[NO MAP]
+
+
+### web/src/views/system/user/account/index.vue
+[NO MAP]
+
+### web/src/views/system/user/account/modules/account-form.vue
+[NO MAP]
+
+### web/src/views/system/user/account/modules/account-table.vue
+[NO MAP]
+
+### web/src/views/system/user/index.vue
+[NO MAP]
+
+### web/src/views/system/user/modules/user-form.vue
+[NO MAP]
+
+### web/src/views/system/user/modules/user-table.vue
+[NO MAP]
+
+### web/src/views/system/user/modules/user-tenant.vue
+[NO MAP]
+
+### web/src/views/system/user/setting/data.ts
+[NO MAP]
+
+
+### web/src/views/system/user/setting/index.vue
+[NO MAP]
+
+### web/src/views/system/user/setting/modules/setting-form.vue
+[NO MAP]
+
+### web/src/views/system/user/setting/modules/setting-table.vue
+[NO MAP]
+
+### web/src/views/system/user/setting/modules/setting.vue
+[NO MAP]
+
+### web/src/views/system/user/setting/setting.ts
+[NO MAP]
+
+
+### web/src/views/system/user/setting/types.ts
+[NO MAP]
+
+
+### web/src/views/system/user/setting/utils.ts
+[NO MAP]
+
+
+### web/src/views/system/user/tenant/data.ts
+[NO MAP]
+
+
+### web/src/views/system/user/tenant/index.vue
+[NO MAP]
+
+### web/src/views/system/user/tenant/modules/tenant-form.vue
+[NO MAP]
+
+### web/src/views/system/user/tenant/modules/tenant-table.vue
+[NO MAP]
+
+### web/src/views/system/user/tenant/modules/tenant.vue
+[NO MAP]
+
+### web/src/views/system/user/tenant/tenant.ts
+[NO MAP]
+
+
+### web/src/views/system/user/tenant/types.ts
+[NO MAP]
+
+
+### web/src/views/system/user/tenant/utils.ts
+[NO MAP]
+
+
+### web/src/views/system/user/tenant/tenant-form.vue
+[NO MAP]
+
+### web/src/views/system/user/tenant/tenant-table.vue
+[NO MAP]
+
+### web/src/views/system/user/tenant/tenant.vue
+[NO MAP]
+
+### web/src/views/system/user/tenant/types.ts
+[NO MAP]
+
+
+### web/src/views/system/user/tenant/utils.ts
+[NO MAP]
+
+
+### web/vite.config.ts
+[NO MAP]
