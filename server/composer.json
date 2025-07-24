@@ -24,13 +24,6 @@
         "source": "https://github.com/walkor/webman"
     },
     "repositories": [
-        {
-            "type": "path",
-            "url": "./packages/*",
-            "options": {
-                "symlink": true
-            }
-        }
     ],
     "require": {
         "php": ">=8.1",
@@ -78,7 +71,9 @@
         "webman/rate-limiter": "^1.1",
         "ext-pdo": "*",
         "topthink/think-template": "^3.0",
-        "ext-gd": "*"
+        "ext-gd": "*",
+        "php-di/php-di": "^7.0",
+        "casbin/casbin": "^4.0"
     },
     "suggest": {
         "ext-event": "For better performance. "
