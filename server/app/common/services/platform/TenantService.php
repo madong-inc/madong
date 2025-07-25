@@ -84,15 +84,16 @@ class TenantService extends BaseService
                 if (boolval($data['is_create_admin'])) {
                     //3 添加用户信息
                     $userInfo = [
-                        'password'     => $password,
-                        'user_name'    => $account ?? '',
-                        'real_name'    => $data['contact_person'] ?? '',
-                        'nick_name'    => $data['contact_person'] ?? '',
-                        'mobile_phone' => $data['contact_phone'] ?? '',
-                        'is_super'     => 0,//非管理员
-                        'avatar'       => '/upload/default.png',
-                        'enabled'      => 1,
-                        'created_at'   => time(),
+                        'password'        => $password,
+                        'user_name'       => $account ?? '',
+                        'real_name'       => $data['contact_person'] ?? '',
+                        'nick_name'       => $data['contact_person'] ?? '',
+                        'mobile_phone'    => $data['contact_phone'] ?? '',
+                        'is_super'        => 0,//非管理员
+                        'is_tenant_admin' => 1,//租户管理员
+                        'avatar'          => '/upload/default.png',
+                        'enabled'         => 1,
+                        'created_at'      => time(),
                     ];
                     $service  = new SysAdminService();
                     /** @var  SysAdmin $userModel */

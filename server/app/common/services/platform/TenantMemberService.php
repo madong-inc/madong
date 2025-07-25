@@ -61,7 +61,7 @@ class TenantMemberService extends BaseService
                 $adminTenant = [
                     'admin_id'   => $model->id,
                     'tenant_id'  => TenantContext::getTenantId(),
-                    'is_super'   => 2,//普通用户
+                    'is_super'   => 1,//租户管理员
                     'is_default' => 1,
                     'priority'   => 0,
                     'created_at' => time(),
