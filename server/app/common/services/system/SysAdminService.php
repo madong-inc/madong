@@ -304,14 +304,19 @@ class SysAdminService extends BaseService
      * 验证管理员状态
      *
      * @param \app\common\model\system\SysAdmin|null $adminInfo
+     *
+     * @throws \core\exception\handler\AdminException
      */
     private function validateAdminStatus(?SysAdmin $adminInfo): void
     {
         if (!$adminInfo) {
             throw new AdminException('账号或密码错误，请重新输入!');
         }
+        if ($adminInfo->enabled === 0) {
+            throw new AdminException('您已被禁止登录');
+        }
         if ($adminInfo->is_locked === 1) {
-            throw new AdminException('您已被禁止登录!');
+            throw new AdminException('您的账号被锁定，禁止登录!');
         }
     }
 
