@@ -16,6 +16,7 @@ use app\common\dao\system\SysMessageDao;
 use core\abstract\BaseService;
 use core\email\MessagePushService;
 use core\enum\system\MessageStatus;
+use madong\helper\Arr;
 use madong\ingenious\libs\utils\ArrayHelper;
 use support\Container;
 
@@ -64,7 +65,7 @@ class SysMessageService extends BaseService
     public function isRead(string|array $param): void
     {
         try {
-            $data         = ArrayHelper::normalize($param);
+            $data         = Arr::normalize($param);
             $messageModel = $this->dao->getModel();
             $models       = $messageModel->find($data);
             foreach ($models as $model) {
@@ -87,7 +88,7 @@ class SysMessageService extends BaseService
     public function isUnread(string|array $param): void
     {
         try {
-            $data         = ArrayHelper::normalize($param);
+            $data         = Arr::normalize($param);
             $messageModel = $this->dao->getModel();
             $models       = $messageModel->find($data);
             foreach ($models as $model) {

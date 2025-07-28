@@ -439,7 +439,7 @@
         },
         "toolbar": {
           "create": "Add New",
-          "enum":"Enum Dict",
+          "enum": "Enum Dict",
           "delete": {
             "label": "Delete",
             "title": "Confirmation",
@@ -663,6 +663,11 @@
               "label": "Delete",
               "title": "Confirmation",
               "confirm": "Confirm deletion?"
+            },
+            "publish": {
+              "label": "Publish",
+              "title": "Reminder",
+              "confirm": "Are you sure you want to publish the announcement 【{0}】?"
             }
           }
         },

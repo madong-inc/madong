@@ -27,6 +27,11 @@ export const useNotifyStore = defineStore(
       return userStore.userInfo?.id || '0';
     });
 
+    const tenantId = computed(() => {
+      //@ts-ignore
+      return userStore.userInfo?.tenant?.tenant_id || '*';
+    });
+
     const notifications = computed(() => {
       const currentUserId = String(userId.value);
       return notificationList.value.filter(item => String(item.uid) === currentUserId);
@@ -70,7 +75,7 @@ export const useNotifyStore = defineStore(
           related_id: data.related_id || '',
           uid: data.receiver_id,
           type: data?.type || '',
-          channel:data.channel||'notice'
+          channel: data.channel || 'notice'
         });
       }
     }
@@ -95,27 +100,38 @@ export const useNotifyStore = defineStore(
         auth: '/plugin/webman/push/auth' // 订阅鉴权(仅限于私有频道)
       });
 
-      const notices_channel = connection.subscribe('admin');
-      const message_channel = connection.subscribe('admin-' + userId.value);
 
+      // 公共订阅-弃用
+      // const notices_channel = connection.subscribe('backend-'+'admin-' + tenantId.value+'-*');
       //公告订阅
-      notices_channel.on('notice', function (message: any) {
-        if (Array.isArray(message)) {
-          message.forEach((data: any) => {
-            data['receiver_id'] = userId.value;//公告没有对应的接收人把本地登录的用户id追加到数据流
-            addUniqueNotification(data);
-          });
-        } else {
-          message['receiver_id'] = userId.value;//公告没有对应的接收人把本地登录的用户id追加到数据流
-          addUniqueNotification(message);
-        }
-      });
+      // notices_channel.on('notice', function (message: any) {
+      //   if (Array.isArray(message)) {
+      //     message.forEach((data: any) => {
+      //       data['receiver_id'] = userId.value;//公告没有对应的接收人把本地登录的用户id追加到数据流
+      //       addUniqueNotification(data);
+      //     });
+      //   } else {
+      //     message['receiver_id'] = userId.value;//公告没有对应的接收人把本地登录的用户id追加到数据流
+      //     addUniqueNotification(message);
+      //   }
+      // });
+
 
 
       /**
-       * 消息订阅
+       * 
+       * 订阅后端消息通道（格式：backend-{模块}-{租户ID}-{用户ID}）
+       * 
+       * 通道命名规则：
+       * - backend      : 固定前缀，标识后端服务通道（与前端其他通道区分）
+       * - admin         : 业务模块标识（此处为管理员模块，可替换为其他模块）
+       * - tenantId.value   : 当前租户的唯一ID
+       * - userId.value     : 当前用户的唯一ID
+       * 示例最终通道名：backend-admin-1-1
        */
-      message_channel.on('message', function (message: any) {
+      const message_channel = connection.subscribe('backend-' + 'admin-' + tenantId.value + '-' + userId.value);
+      message_channel.on('message', function (data: any) {
+        const message = data.messages || {}
         if (Array.isArray(message)) {
           message.forEach((data: any) => {
             //添加到列表

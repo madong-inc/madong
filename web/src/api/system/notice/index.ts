@@ -1,6 +1,6 @@
 import BaseApi from "#/api/base-api";
 import { requestClient } from "#/api/request";
-import type{ SystemNoticeRow } from "./model";
+import type { SystemNoticeRow } from "./model";
 
 
 
@@ -13,10 +13,13 @@ export class SystemNoticeApi extends BaseApi<SystemNoticeRow> {
         super('/system/notice');
     }
 
-
-
-    test() {
-        return requestClient.post(this.baseUrl+'/test');
+    /**
+     * 推送公告
+     * @param data 
+     * @returns 
+     */
+    publish(data:any) {
+        return requestClient.put(this.baseUrl + '/publish', data);
     }
 
 }

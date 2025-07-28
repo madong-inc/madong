@@ -188,6 +188,8 @@ class SysAdmin extends BaseModel
         return $this->belongsToMany(RuleModel::class, SysAdminCasbin::class, 'admin_id', 'admin_casbin_id', 'id', 'v0')->where('v2', $tenantId);
     }
 
+
+
     /**
      * 默认链接
      */

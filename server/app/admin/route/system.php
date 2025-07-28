@@ -217,7 +217,7 @@ Route::group('/system', function () {
         Route::post('/notice', [\app\admin\controller\system\SysNoticeController::class, 'store'])->name('系统设置.通知公告.保存');
         Route::put('/notice', [\app\admin\controller\system\SysNoticeController::class, 'update'])->name('系统设置.通知公告.更新');
         Route::delete('/notice/{id}', [\app\admin\controller\system\SysNoticeController::class, 'destroy'])->name('系统设置.通知公告.删除');
-        Route::post('/notice/test', [\app\admin\controller\system\SysNoticeController::class, 'test'])->name('系统设置.通知公告.保存');
+        Route::put('/notice/publish', [\app\admin\controller\system\SysNoticeController::class, 'publish'])->name('系统设置.通知公告.发布');
     });
 
     /**

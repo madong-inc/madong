@@ -670,6 +670,11 @@
               "label": "删除",
               "title": "温馨提示",
               "confirm": "是否确认删除?"
+            },
+            "publish":{
+              "label":"推送",
+              "title": "温馨提示",
+              "confirm": "请确认是否推送【{0}】公告？"
             }
           }
         },
@@ -730,8 +735,8 @@
           "status": "是否已读",
           "priority": "优先级",
           "channel": "场景",
-          "created_date": "接受时间",
-          "read_date": "查看时间",
+          "created_date": "接收时间",
+          "read_date": "阅读时间",
           "updated_date": "更新时间",
           "operation": "操作",
           "actions": {

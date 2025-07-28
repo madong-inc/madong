@@ -16,20 +16,39 @@ use app\admin\controller\Crud;
 use app\admin\validate\system\SysNoticeValidate;
 use app\common\services\system\SysNoticeService;
 use core\email\MessagePushService;
+use core\utils\Json;
 use support\Container;
+use support\Request;
+use Webman\RedisQueue\Client;
 
 class SysNoticeController extends Crud
 {
     public function __construct()
     {
         parent::__construct();
-        $this->validate=Container::make(SysNoticeValidate::class);
-        $this->service = Container::make(SysNoticeService::class);
+        $this->validate = Container::make(SysNoticeValidate::class);
+        $this->service  = Container::make(SysNoticeService::class);
     }
 
-    public function test(){
-         MessagePushService::broadcastMessage();
-//          MessagePushService::pushMessage(1, '发送私人信息', 2);
+    /**
+     * 发布公告
+     *
+     * @param \support\Request $request
+     *
+     * @return \support\Response
+     */
+    public function publish(Request $request): \support\Response
+    {
+        try {
+            $id = $request->input('id', null);
+            //推送公告
+            $model = $this->service->get($id);
+            //推送消息
+            $queue = 'admin-announcement-push';
+            Client::send($queue, $model->makeVisible('tenant_id')->toArray(), 0);
+            return Json::success('ok', []);
+        } catch (\Throwable $e) {
+            return Json::fail($e->getMessage());
+        }
     }
-
 }

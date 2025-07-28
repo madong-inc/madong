@@ -60,8 +60,8 @@ export default defineConfig(async () => {
             ws: true
           }
         },
-        '/ws': {
-          target: env.VITE_GLOB_WSS_URL || 'ws://127.0.0.1:3898',
+         '/ws': {
+          target: env.VITE_WSS_URL || 'ws://127.0.0.1:3898',
           changeOrigin: true,
           ws: true,
           rewrite: (path: string) => path.replace(/^\/ws/, '')

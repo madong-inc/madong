@@ -48,7 +48,6 @@ class SysAdminTenant extends BasePivot
 
     protected $appends = ['created_date', 'updated_date'];
 
-
     protected $fillable = [
         "id",
         "admin_id",
@@ -60,6 +59,16 @@ class SysAdminTenant extends BasePivot
         "created_at",
         "updated_at",
     ];
+
+    /**
+     * 管理消息-列表
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function message(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(SysMessage::class, 'receiver_id', 'admin_id');
+    }
 
     /**
      * 关联租户

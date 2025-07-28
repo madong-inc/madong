@@ -14,6 +14,7 @@ import { TableAction } from "#/components/table";
 import { SystemMessageApi } from "#/api/system/message";
 import type { SystemMessageRow } from "#/api/system/message";
 import { router } from "#/router";
+import { $t } from "#/locale";
 
 const api = new SystemMessageApi();
 
@@ -98,7 +99,7 @@ const [Grid, gridApi] = useVxeGrid({
       },
     },
     // border:'inner',
-    id: "system-post-index",
+    id: "system-message-index",
   },
   gridEvents: {
     menuClick({ menu, row, column }) {
@@ -194,11 +195,47 @@ const messageHandlers = {
     }
   },
 };
+
+
+/**
+ * 批量删除
+ */
+function handleMultiDelete() {
+  const rows = gridApi.grid.getCheckboxRecords();
+  const data = rows.map((row: SystemMessageRow) => row.id);
+  Modal.confirm({
+    title:  $t('system.message.list.table.columns.actions.delete.title'),
+    okType: "danger",
+    content: $t('system.message.list.table.columns.actions.delete.confirm',[rows.length]),
+    onOk: async () => {
+      await api.remove(0, {data});
+      await gridApi.query();
+    },
+  });
+}
+
+
 </script>
 
 <template>
   <Page :auto-content-height="true">
-    <Grid :table-title="$t('system.message.list.title')"> </Grid>
+    <Grid> 
+    <template #toolbar-buttons>
+        <TableAction
+          :actions="[
+            {
+              label: $t('system.message.list.table.toolbar.delete.label'),
+              type: 'primary',
+              danger: true,
+              icon:'ant-design:delete-outlined',
+              auth: ['admin', 'system:message:delete'],
+              disabled: !isCheckboxChecked(gridApi),
+              onClick:handleMultiDelete.bind(null, false)
+            }
+          ]"
+        ></TableAction>
+      </template>
+    </Grid>
     <MessageDrawer @reload="gridApi.query()" />
   </Page>
 </template>
