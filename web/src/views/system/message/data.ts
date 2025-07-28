@@ -86,10 +86,11 @@ export function useColumns(
       align: 'left',
       field: 'title',
       minWidth: 150,
+      visible: false,
       slots: {
         //@ts-ignore
         default: ({ row }) => {
-          if(row.related_id == undefined ||row.related_id == ''||row.related_id == null){
+          if (row.related_id == undefined || row.related_id == '' || row.related_id == null) {
             return '/';
 
           }
@@ -112,7 +113,7 @@ export function useColumns(
       title: $t('system.message.list.table.columns.title'),
       align: 'left',
       field: 'title',
-      minWidth: 200,
+      minWidth: 170,
       slots: {
         //@ts-ignore
         default: ({ row }) => {
@@ -150,6 +151,7 @@ export function useColumns(
       title: $t('system.message.list.table.columns.type'),
       field: 'type',
       width: 100,
+      visible: false,
       cellRender: {
         name: 'CellTag',
         options: getDictOptions(DictEnum.SYS_MESSAGE_TYPE)
@@ -171,6 +173,18 @@ export function useColumns(
       title: $t('system.message.list.table.columns.created_date'),
       field: 'created_date',
       width: 150
+    },
+    {
+      title: $t('system.message.list.table.columns.read_date'),
+      field: 'read_date',
+      width: 150,
+      slots: {
+        //@ts-ignore
+        default: ({ row }) => {
+          const { read_date } = row;
+          return read_date || '/'
+        }
+      }
     }
   ];
 }

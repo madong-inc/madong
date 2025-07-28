@@ -14,6 +14,7 @@ import noticeModal from "./modules/form.vue";
 import { FormProps } from "#/adapter";
 import { getNestedValue } from "#/utils";
 import { TableAction } from "#/components/table";
+import { $t } from "#/locale";
 
 
 const api = new SystemNoticeApi();
@@ -91,7 +92,7 @@ const [Grid, gridApi] = useVxeGrid({
         buttons: "toolbar-buttons",
       },
     },
-    id: "system-post-index",
+    id: "system-notice-index",
   },
   gridEvents: {
     menuClick({ menu, row, column }) {
@@ -131,6 +132,9 @@ function onActionClick({ code, row }: OnActionClickParams<SystemNoticeRow>) {
       handleDelete(row);
       break;
     }
+    case "publish":{
+       handlePublish(row);
+    }
     default: {
       break;
     }
@@ -157,17 +161,31 @@ async function handleDelete(row: SystemNoticeRow) {
 
 function handleMultiDelete() {
   const rows = gridApi.grid.getCheckboxRecords();
-  const ids = rows.map((row: SystemNoticeRow) => row.id);
+  const data = rows.map((row: SystemNoticeRow) => row.id);
   Modal.confirm({
-    title: "提示",
+    title:  $t('system.notice.list.table.columns.actions.delete.title'),
     okType: "danger",
-    content: `确认删除选中的${ids.length}条记录吗？`,
+    content: $t('system.notice.list.table.columns.actions.delete.confirm',[rows.length]),
     onOk: async () => {
-      await api.remove(0, ids);
+      await api.remove(0, {data});
       await gridApi.query();
     },
   });
 }
+
+
+function handlePublish(row:SystemNoticeRow) {
+  Modal.confirm({
+    title:$t('system.notice.list.table.columns.actions.publish.title'),
+    okType: "danger",
+    content: $t('system.notice.list.table.columns.actions.publish.confirm',[row.title]),
+    onOk: async () => {
+      await api.publish({id:row.id});
+       message.success($t('common.message.success'));
+    },
+  });
+}
+
 </script>
 
 <template>

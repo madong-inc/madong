@@ -30,7 +30,7 @@ class SysNotice extends BaseModel
      *
      * @var bool
      */
-    public $timestamps = false;
+    public $timestamps = true;
 
     protected $appends = ['created_date', 'updated_date'];
 
@@ -43,6 +43,7 @@ class SysNotice extends BaseModel
         'content',
         'enabled',
         'created_dept',
+        'uuid',
         'created_by',
         'created_at',
         'updated_by',

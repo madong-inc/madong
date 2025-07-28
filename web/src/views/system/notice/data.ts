@@ -104,6 +104,11 @@ export function useColumns(
             code: 'delete',
             text: $t('system.notice.list.table.columns.actions.delete.label'),
             auth: ['admin', 'system:notice:delete'],
+          },
+          {
+            code: 'publish',
+            text: $t('system.notice.list.table.columns.actions.publish.label'),
+            auth: ['admin', 'system:notice:publish'],
           }
         ],
       },
