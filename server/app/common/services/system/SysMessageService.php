@@ -14,10 +14,10 @@ namespace app\common\services\system;
 
 use app\common\dao\system\SysMessageDao;
 use core\abstract\BaseService;
-use core\email\MessagePushService;
 use core\enum\system\MessageStatus;
+use core\notify\enum\PushClientType;
+use core\notify\Notification;
 use madong\helper\Arr;
-use madong\ingenious\libs\utils\ArrayHelper;
 use support\Container;
 
 /**
@@ -42,13 +42,12 @@ class SysMessageService extends BaseService
     public function notifyOnFirstLoginToAll(string|int|array $id): void
     {
         try {
-            $service = Container::make(MessagePushService::class);
-            //1.0推送广播
-            $service->notificationBroadcast();
-            //2.0推送消息
-            $models = $this->selectList(['status' => MessageStatus::UNREAD], '*', 0, 0, '', []);
-            foreach ($models as $model) {
-                $service->pushNotificationToUser($id, $model);
+            // 获取历史消息记录
+            $models = $this->selectList(['status' => MessageStatus::UNREAD], '*', 0, 0, '', [])->makeVisible('tenant_id')->toArray();
+            if (!empty($models)) {
+                foreach ($models as $value) {
+                    Notification::pushOnly(PushClientType::BACKEND, 'admin', $value['tenant_id'], $value['receiver_id'], 'message', [], $value, null);
+                }
             }
         } catch (\Throwable $e) {
             throw  new \Exception($e->getMessage());

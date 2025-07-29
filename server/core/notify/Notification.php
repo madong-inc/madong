@@ -23,6 +23,8 @@ use support\Container;
  * - 多通道通知分发
  * @method static array sendAndRecord(PushClientType $clientType, string $businessModule, string $tenantId, string|int|array $userIds, string $event, array $data = [], array $messageData = [], ?string $socketId = null) 推送消息并记录（支持单条/批量）
  * @method static array batchSend(PushClientType $clientType, string $tenantId, array $messages) 批量推送不同业务消息
+ * @method static array pushOnly(PushClientType $clientType, string $businessModule, string $tenantId, string|int|array $userIds, string $event = 'message', array $data = [], $messages = [], ?string $socketId = null) 仅推送消息（不记录）
+ * @method static array recordOnly(array $userIds, array $messageData)  仅记录消息（不推送）
  *
  * @see \core\notify\NotificationService 底层服务实现类
  */
@@ -61,8 +63,5 @@ final class Notification
     {
         return self::instance()->$method(...$args);
     }
-
-
-
 
 }

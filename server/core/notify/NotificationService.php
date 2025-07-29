@@ -180,6 +180,9 @@ final class NotificationService
     /**
      * 仅推送消息（不记录）
      */
+    /**
+     * 仅推送消息（不记录）
+     */
     public function pushOnly(
         PushClientType   $clientType,
         string           $businessModule,
@@ -187,6 +190,7 @@ final class NotificationService
         string|int|array $userIds,
         string           $event = 'message',
         array            $data = [],
+        array            $messages = [],
         ?string          $socketId = null
     ): int
     {
@@ -196,7 +200,11 @@ final class NotificationService
             $userIds
         );
 
-        return $this->pushApi->trigger($channels, $event, $data, $socketId);
+        $pushData = array_merge($data, [
+            'messages' => $this->formatMessagesForPush($messages),
+        ]);
+
+        return $this->pushApi->trigger($channels, $event, $pushData, $socketId);
     }
 
     /**
