@@ -67,7 +67,6 @@ class AdminAnnouncementPushConsumer implements Consumer
             Logger::debug("公告推送完成: {$data['title']}");
             return true;
         } catch (\Throwable $e) {
-            var_dump($e->getMessage());
             Logger::error("公告推送失败: " . $e->getMessage(), [
                 'error' => $e->getTraceAsString(),
                 'data'  => $data,
@@ -144,13 +143,8 @@ class AdminAnnouncementPushConsumer implements Consumer
 
         // 如果有UUID，则排除已推送的用户
         if (!empty($uuid)) {
-            $query->where(function ($q) use ($uuid) {
-                $q->whereDoesntHave('message', function ($subQuery) use ($uuid) {
-                    $subQuery->where('message_uuid', $uuid);
-                })
-                    ->orWhereHas('message', function ($subQuery) {
-                        $subQuery->whereNull('message_uuid');
-                    });
+            $query->whereDoesntHave('message', function ($q) use ($uuid) {
+                $q->where('message_uuid', $uuid);
             });
         }
 
