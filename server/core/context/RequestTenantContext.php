@@ -13,7 +13,9 @@
 namespace core\context;
 
 use core\enum\platform\IsolationMode;
+use Illuminate\Database\Connection;
 use InvalidArgumentException;
+use support\Db;
 
 class RequestTenantContext implements RequestTenantContextInterface
 {
@@ -157,6 +159,16 @@ class RequestTenantContext implements RequestTenantContextInterface
     {
         $expirationTime = $this->getExpirationTime();
         return $expirationTime !== null && time() > $expirationTime;
+    }
+
+    /**
+     * 获取数据库连接
+     *
+     * @return Connection
+     */
+    public function db(): Connection
+    {
+        return Db::connection($this->getDatabaseConnection());
     }
 
     private function validateIsolationMode(string|int $mode): void

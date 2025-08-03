@@ -1,6 +1,6 @@
 import type { NotificationItem } from '#/components/common/effects/layouts';
 
-import { computed, ref } from 'vue';
+import { computed, h, ref, RendererElement, RendererNode, VNode, VNodeArrayChildren } from 'vue';
 
 import { useUserStore } from '#/components/common/stores';
 
@@ -60,10 +60,27 @@ export const useNotifyStore = defineStore(
         String(notification.channel === String(data.channel))
       );
       if (!exists) {
+        const formattedContent = computed(() => {
+          const text = data.content
+            .replace(/\\n/g, '\n') // 还原 \\n → \n
+            .replace(/\n\n/g, '\n\n') // 保留双换行标记
+            .replace(/\n/g, '\n');     // 保留单换行标记
+
+          // 按 \n\n 分割段落
+          const paragraphs = text.split('\n\n');
+          return h('div',
+            paragraphs.map((para: string) =>
+              h('p',
+                para.split('\n').map((line: string | number | boolean | VNode<RendererNode, RendererElement, { [key: string]: any; }> | VNodeArrayChildren | (() => any) | { [name: string]: unknown; $stable?: boolean; } | undefined) => h('span', { style: { display: 'block' } }, line))
+              )
+            )
+          );
+        });
+
         notification.success({
           message: data.title || '新消息提醒',
           duration: 5,
-          description: data.content || '',
+          description: formattedContent.value,
         });
         notificationList.value.unshift({
           id: String(data.id),
@@ -99,24 +116,6 @@ export const useNotifyStore = defineStore(
         app_key: appKey,
         auth: '/plugin/webman/push/auth' // 订阅鉴权(仅限于私有频道)
       });
-
-
-      // 公共订阅-弃用
-      // const notices_channel = connection.subscribe('backend-'+'admin-' + tenantId.value+'-*');
-      //公告订阅
-      // notices_channel.on('notice', function (message: any) {
-      //   if (Array.isArray(message)) {
-      //     message.forEach((data: any) => {
-      //       data['receiver_id'] = userId.value;//公告没有对应的接收人把本地登录的用户id追加到数据流
-      //       addUniqueNotification(data);
-      //     });
-      //   } else {
-      //     message['receiver_id'] = userId.value;//公告没有对应的接收人把本地登录的用户id追加到数据流
-      //     addUniqueNotification(message);
-      //   }
-      // });
-
-
 
       /**
        * 

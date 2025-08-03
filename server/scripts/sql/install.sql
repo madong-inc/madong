@@ -505,6 +505,8 @@ CREATE TABLE `ma_sys_message`
     `priority`     tinyint(1) NULL DEFAULT 3 COMMENT '优先级（1紧急 2急迫 3普通）',
     `channel`      varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT 'message' COMMENT '发送渠道',
     `related_id`   varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '关联业务ID（如订单号、日志ID等）',
+    `related_type` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '关联业务类型',
+    `jump_params`  json NULL COMMENT '跳转关联业务参数',
     `message_uuid` varchar(50) NULL DEFAULT NULL COMMENT '消息uuid',
     `created_at`   bigint(20) NULL DEFAULT NULL COMMENT '创建时间',
     `expired_at`   bigint(20) NULL DEFAULT NULL COMMENT '过期时间',

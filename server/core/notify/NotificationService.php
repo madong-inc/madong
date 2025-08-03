@@ -72,6 +72,7 @@ final class NotificationService
         ?string          $socketId = null
     ): array
     {
+
         $userIds = Arr::normalize($userIds);
         $result  = [
             'push_count' => 0,
@@ -180,9 +181,6 @@ final class NotificationService
     /**
      * 仅推送消息（不记录）
      */
-    /**
-     * 仅推送消息（不记录）
-     */
     public function pushOnly(
         PushClientType   $clientType,
         string           $businessModule,
@@ -231,17 +229,13 @@ final class NotificationService
 
         $messages = [];
         foreach ($receiverIds as $receiverId) {
-            try {
-                $message    = $this->messageModel->create(array_merge(
-                    $defaults,
-                    $data,
-                    ['message_uuid' => $this->generateMessageUuid($data['message_uuid'] ?? null)],
-                    ['receiver_id' => $receiverId]
-                ));
-                $messages[] = $message->toArray(); // 直接返回模型数据
-            } catch (\Throwable $e) {
-                throw new \Exception($e->getMessage());
-            }
+            $message    = $this->messageModel->create(array_merge(
+                $defaults,
+                $data,
+                ['message_uuid' => $this->generateMessageUuid($data['message_uuid'] ?? null)],
+                ['receiver_id' => $receiverId]
+            ));
+            $messages[] = $message->toArray(); // 直接返回模型数据
 
         }
         return $messages;
@@ -270,7 +264,7 @@ final class NotificationService
     /**
      * 计算过期时间戳
      */
-    private function calculateExpireTimestamp(?int $expireDays): int
+    private function calculateExpireTimestamp(int|null $expireDays): int
     {
         if ($expireDays === null) {
             $expireDays = self::DEFAULT_EXPIRE_DAYS;

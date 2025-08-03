@@ -34,6 +34,7 @@ use support\Container;
  * @method static ?int getExpirationTime()
  * @method static bool isExpired()
  * @method static getTenantId()
+ * @method static db()
  */
 class TenantContext
 {
