@@ -1,0 +1,7 @@
+START TRANSACTION;
+ALTER TABLE `ma_sys_message` ADD COLUMN `related_type` VARCHAR(50) NULL DEFAULT NULL COMMENT '业务类型';
+ALTER TABLE `ma_sys_message` ADD COLUMN `jump_params` JSON(0) NULL DEFAULT NULL COMMENT '跳转参数';
+
+COMMIT;
+
+
