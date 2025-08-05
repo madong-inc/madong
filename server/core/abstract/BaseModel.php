@@ -20,16 +20,14 @@ use app\common\scopes\global\TenantSharedTableScope;
 use app\common\services\system\SysRecycleBinService;
 use Carbon\Carbon;
 use core\exception\handler\AdminException;
+use core\uuid\Snowflake;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use core\context\TenantContext;
-use madong\helper\Snowflake;
 use support\Container;
 use support\Model;
 
 class BaseModel extends Model
 {
-    private const WORKER_ID = 1;
-    private const DATA_CENTER_ID = 1;
 
     /**
      * 指明模型的ID是否自动递增。
@@ -109,7 +107,7 @@ class BaseModel extends Model
         //注册创建事件
         static::creating(function ($model) {
             if (!isset($model->{$model->getKeyName()})) {
-                $model->{$model->getKeyName()} = self::generateSnowflakeID(); // 生成雪花 ID
+                $model->{$model->getKeyName()} = Snowflake::generate(); // 生成雪花 ID
             }
             self::setCreatedBy($model);
             self::setTenantId($model);
@@ -238,6 +236,8 @@ class BaseModel extends Model
      * 删除事件
      *
      * @param \support\Model $model
+     *
+     * @throws \core\exception\handler\AdminException
      */
     public static function onAfterDelete(Model $model)
     {
@@ -340,31 +340,6 @@ class BaseModel extends Model
         if ($tenantId !== null) {
             $model->setAttribute('tenant_id', $tenantId);
         }
-    }
-
-    /**
-     *  实例化雪花算法
-     *
-     * @return Snowflake
-     */
-    private static function createSnowflake(): Snowflake
-    {
-        if (self::$snowflake == null) {
-            self::$snowflake = new Snowflake(self::WORKER_ID, self::DATA_CENTER_ID);
-        }
-        return self::$snowflake;
-    }
-
-    /**
-     * 生成雪花ID
-     *
-     * @return int
-     * @throws \Exception
-     */
-    private static function generateSnowflakeID(): int
-    {
-        $snowflake = self::createSnowflake();
-        return $snowflake->nextId();
     }
 
     private static function prepareRecycleBinData($tableData, $table, $prefix): array

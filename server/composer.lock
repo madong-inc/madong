@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4806b22e8df2fffa7d8a434576d791e0",
+    "content-hash": "f817c0f2a5ba81575320f7454197f6df",
     "packages": [
         {
             "name": "aliyuncs/oss-sdk-php",
@@ -2873,11 +2873,11 @@
         },
         {
             "name": "madong/helper",
-            "version": "v1.1.0",
+            "version": "v1.1.1",
             "source": {
                 "type": "git",
                 "url": "https://gitcode.com/motion-code/helper.git",
-                "reference": "d13e1d7715b02d87342419643094b53b2218adaf"
+                "reference": "7d6029c0e8d3e09414e5db7bae0aa8b398267276"
             },
             "require": {
                 "illuminate/collections": "*",
@@ -2904,9 +2904,8 @@
                 }
             ],
             "description": "The ingen Helper Package",
-            "time": "2025-07-04T01:40:03+00:00"
+            "time": "2025-08-05T03:16:37+00:00"
         },
-
         {
             "name": "maennchen/zipstream-php",
             "version": "3.1.2",
@@ -7106,64 +7105,6 @@
             "time": "2025-04-07T06:55:59+00:00"
         },
         {
-            "name": "topthink/think-orm",
-            "version": "v3.0.34",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/top-think/think-orm.git",
-                "reference": "715e55da149fe32a12d68ef10e5b00e70bd3dbec"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/top-think/think-orm/zipball/715e55da149fe32a12d68ef10e5b00e70bd3dbec",
-                "reference": "715e55da149fe32a12d68ef10e5b00e70bd3dbec",
-                "shasum": ""
-            },
-            "require": {
-                "ext-json": "*",
-                "ext-pdo": "*",
-                "php": ">=8.0.0",
-                "psr/log": ">=1.0",
-                "psr/simple-cache": ">=1.0",
-                "topthink/think-helper": "^3.1"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^9.6|^10"
-            },
-            "suggest": {
-                "ext-mongodb": "provide mongodb support"
-            },
-            "type": "library",
-            "autoload": {
-                "files": [
-                    "stubs/load_stubs.php"
-                ],
-                "psr-4": {
-                    "think\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "Apache-2.0"
-            ],
-            "authors": [
-                {
-                    "name": "liu21st",
-                    "email": "liu21st@gmail.com"
-                }
-            ],
-            "description": "the PHP Database&ORM Framework",
-            "keywords": [
-                "database",
-                "orm"
-            ],
-            "support": {
-                "issues": "https://github.com/top-think/think-orm/issues",
-                "source": "https://github.com/top-think/think-orm/tree/v3.0.34"
-            },
-            "time": "2025-01-14T06:03:33+00:00"
-        },
-        {
             "name": "topthink/think-template",
             "version": "v3.0.2",
             "source": {
@@ -7832,39 +7773,6 @@
             "time": "2025-01-24T12:56:01+00:00"
         },
         {
-            "name": "webman/think-orm",
-            "version": "v1.1.6",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/webman-php/think-orm.git",
-                "reference": "32b464f44e727b8a687ddd707ddb84e6f8a2ce74"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/webman-php/think-orm/zipball/32b464f44e727b8a687ddd707ddb84e6f8a2ce74",
-                "reference": "32b464f44e727b8a687ddd707ddb84e6f8a2ce74",
-                "shasum": ""
-            },
-            "require": {
-                "topthink/think-orm": "^2.0.53 || ^3.0.0 || ^4.0.0 || dev-master"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Webman\\ThinkOrm\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "support": {
-                "issues": "https://github.com/webman-php/think-orm/issues",
-                "source": "https://github.com/webman-php/think-orm/tree/v1.1.6"
-            },
-            "time": "2024-11-22T03:17:44+00:00"
-        },
-        {
             "name": "workerman/coroutine",
             "version": "v1.1.3",
             "source": {
@@ -8269,7 +8177,7 @@
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {},
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
@@ -8278,6 +8186,6 @@
         "ext-pdo": "*",
         "ext-gd": "*"
     },
-    "platform-dev": [],
+    "platform-dev": {},
     "plugin-api-version": "2.6.0"
 }
