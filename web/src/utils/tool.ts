@@ -1,4 +1,5 @@
 
+import { getApiBaseUrl } from '#/api/request';
 import { useSiteConfigStore } from '#/store/modules/site-config';
 import type { App, Component } from 'vue';
 
@@ -116,24 +117,6 @@ const padStart = (str: string, maxLength: number, fillString = ' ') => {
   return fillString.slice(0, fillLength) + str
 }
 
-/**
- * 根据环境获取基础URL
- * @returns 
- */
-export const getUrl = (): string => {
-    const value: string = import.meta.env.VITE_AXIOS_BASE_URL as string
-    return value == 'fetchCurrentDomain' ? window.location.protocol + '//' + window.location.host : value
-}
-
-
-/**
- * 根据环境获取基础请求URL的端口
- */
-export const getPort = (): string => {
-    const url = getUrl()
-    return new URL(url).port
-}
-
 
 
 /**
@@ -144,10 +127,9 @@ export const getPort = (): string => {
  */
 export const fullUrl = (relativeUrl: string, domain: string = ''): string => {
   const siteConfig = useSiteConfigStore();
-  
 
   // 1. 处理空路径直接返回域名
-  if (!relativeUrl) return domain || getUrl();
+  if (!relativeUrl) return domain || getApiBaseUrl(null);
 
 
 
@@ -157,7 +139,7 @@ export const fullUrl = (relativeUrl: string, domain: string = ''): string => {
   if (isAbsoluteUrl || isDataUrl) return relativeUrl;
 
   // 3. 确定最终使用的域名
-  const finalDomain = domain || siteConfig.state.cdn_url || getUrl();
+  const finalDomain = domain || siteConfig.state.cdn_url || getApiBaseUrl();
   if (!finalDomain) return relativeUrl; // 保底返回原路径
 
   // 4. 拼接URL
@@ -174,6 +156,46 @@ export const fullUrl = (relativeUrl: string, domain: string = ''): string => {
 
   return url;
 };
+
+
+/**
+ * 移除URL中的公共路径前缀
+ * @param url 待处理的URL
+ * @param domain 可选指定要移除的特定域名（默认自动检测）
+ * @returns 移除前缀后的相对路径
+ */
+export const stripBaseUrl = (url: string, domain: string = ''): string => {
+  const siteConfig = useSiteConfigStore();
+  
+  // 1. 处理空值
+  if (!url) return '';
+
+  // 2. 检测不需要处理的URL类型
+  const isDataUrl = /^data:image\//i.test(url);
+  if (isDataUrl) return url;
+
+  // 3. 确定要移除的域名（优先级：参数指定 > CDN域名 > API域名）
+  const baseDomain = domain || siteConfig.state.cdn_url || getApiBaseUrl();
+  if (!baseDomain) return url;
+
+  // 4. 标准化待移除的域名（移除尾部斜杠）
+  const normalizedDomain = baseDomain.replace(/\/+$/, '');
+
+  // 5. 移除域名部分（包括协议头可选匹配）
+  let result = url
+    .replace(new RegExp(`^https?:\\/\\/${normalizedDomain}\\/?`), '')
+    .replace(new RegExp(`^${normalizedDomain}\\/?`), '');
+
+  // 6. 移除可能的CDN参数（如果来自同一CDN）
+  if (normalizedDomain === siteConfig.state.cdn_url && siteConfig.state.cdn_url_params) {
+    const paramStr = `[?&]${siteConfig.state.cdn_url_params.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}`;
+    result = result.replace(new RegExp(`${paramStr}(?:&|$)`), '');
+  }
+
+  // 7. 确保不会返回空路径（至少保留原文件名）
+  return result || url.split('/').pop() || '';
+};
+
 
 
 /**

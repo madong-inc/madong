@@ -35,6 +35,7 @@ use support\Container;
  * @method static bool isExpired()
  * @method static getTenantId()
  * @method static db()
+ * @method static getDatabaseConnection()
  */
 class TenantContext
 {

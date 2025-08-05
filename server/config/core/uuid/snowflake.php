@@ -11,6 +11,10 @@
  */
 
 return [
-    'enable'  => true,
-    'version' => '4.0.5',
+    'enable'         => true,
+    'node_id'        => 1,
+    'worker_id'      => null,//使用线程id
+    'node_id_bits'   => 3,
+    'worker_id_bits' => 7,
+    'sequence_bits'  => 12,
 ];

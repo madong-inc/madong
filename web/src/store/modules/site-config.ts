@@ -47,7 +47,7 @@ export const useSiteConfigStore = defineStore('site-config', () => {
             },
             logo: {
                 enable: true,
-                source: state.site_logo,
+                source: fullUrl(state.site_logo),
             },
               copyright: {
                 companyName: state?.site_name||'',

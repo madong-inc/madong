@@ -12,5 +12,4 @@
 
 return [
     'enable'  => true,
-    'version' => '4.0.5',
 ];

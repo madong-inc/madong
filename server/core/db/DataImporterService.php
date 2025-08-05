@@ -12,7 +12,7 @@
 
 namespace core\db;
 
-use madong\helper\Snowflake;
+use core\uuid\Snowflake;
 use PDO;
 
 /**
@@ -23,35 +23,6 @@ use PDO;
  */
 class DataImporterService
 {
-
-    private const WORKER_ID = 1;
-    private const DATA_CENTER_ID = 1;
-
-    /**
-     * 雪花算法实例
-     *
-     * @var Snowflake|null
-     */
-    protected ?Snowflake $snowflake = null;
-
-
-    public function __construct()
-    {
-        $this->snowflake = new Snowflake(self::WORKER_ID, self::DATA_CENTER_ID);
-    }
-
-    /**
-     * 生成雪花ID
-     *
-     * @return int
-     * @throws \Exception
-     */
-    public function generateSnowflakeId(): int
-    {
-        $snowflake = $this->snowflake;
-        return $snowflake->nextId();
-    }
-
 
     /**
      * 获取 PDO 连接的方法
@@ -115,7 +86,7 @@ class DataImporterService
             if ($options['useSnowflakeId']) {
                 $fields[] = $options['idKey'];
                 if (empty($row[$options['idKey']])) {
-                    $row[$options['idKey']] = $this->generateSnowflakeId();
+                    $row[$options['idKey']] = Snowflake::generate();
                 }
             } elseif ($options['useAutoIncrement']) {
                 unset($row[$options['idKey']]);
@@ -195,7 +166,7 @@ class DataImporterService
         foreach ($data as $key => $item) {
             // 如果需要使用雪花ID
             if ($options['useSnowflakeId']) {
-                $item[$options['idKey']] = $this->generateSnowflakeId(); // 生成雪花ID
+                $item[$options['idKey']] = Snowflake::generate(); // 生成雪花ID
             } elseif ($options['useAutoIncrement']) {
                 unset($item[$options['idKey']]); // 自增ID由数据库处理
             }
@@ -244,7 +215,7 @@ class DataImporterService
         foreach ($data as $item) {
             // 如果需要使用雪花ID
             if ($options['useSnowflakeId']) {
-                $item[$options['idKey']] = $this->generateSnowflakeId(); // 生成雪花ID
+                $item[$options['idKey']] = Snowflake::generate(); // 生成雪花ID
             } elseif ($options['useAutoIncrement']) {
                 unset($item[$options['idKey']]); // 自增ID由数据库处理
             }
