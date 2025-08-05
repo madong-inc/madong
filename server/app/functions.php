@@ -18,6 +18,12 @@ use support\Container;
  */
 function getCurrentUser(bool $fullInfo = false, bool $refresh = false): mixed
 {
+    $request = request();
+    $rule    = $request->path();
+    if (in_array($rule, ['/system/logout'])) {
+        return null;
+    }
+
     // 1. 验证请求和授权令牌
     $token = resolveAuthorizationToken();
     if ($token === null) {
