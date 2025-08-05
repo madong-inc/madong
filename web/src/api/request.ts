@@ -15,7 +15,7 @@ import { message } from 'ant-design-vue';
 
 import { refreshTokenApi } from './core';
 
-const apiURL = import.meta.env.VITE_GLOB_API_URL;
+
 
 const clientKey = import.meta.env.VITE_GLOB_CLIENT_KEY;
 
@@ -135,9 +135,28 @@ function createRequestClient(baseURL: string, options?: RequestClientOptions) {
   return client;
 }
 
-export const requestClient = createRequestClient(apiURL, {
+
+export const getApiBaseUrl = (customValue?: string | null): string => {
+  if (customValue) {
+    return customValue === 'useCurrentDomain' 
+        ? window.location.protocol + '//' + window.location.host 
+        : customValue;
+  }
+
+  const envValue = import.meta.env.VITE_GLOB_API_URL;
+  if (envValue) {
+    return envValue === 'useCurrentDomain' 
+        ? window.location.protocol + '//' + window.location.host 
+        : envValue;
+  }
+  return window.location.protocol + '//' + window.location.host;
+}
+
+
+export const requestClient = createRequestClient(getApiBaseUrl(null), {
   responseReturn: 'data',
 });
 
-export const baseRequestClient = new RequestClient({ baseURL: apiURL });
+
+export const baseRequestClient = new RequestClient({ baseURL: getApiBaseUrl(null) });
 
