@@ -13,7 +13,7 @@
 namespace core\route;
 
 use Closure;
-use madong\helper\Snowflake;
+use core\uuid\Snowflake;
 use Webman\Route;
 
 /**
@@ -179,9 +179,8 @@ class RouteOrganizerService
 
     public function buildSnowflakeTree(array $routes, int $workerId = 1, int $dataCenterId = 1): array
     {
-        $generator = new Snowflake($workerId, $dataCenterId);
         $nodes     = [];
-        $pathMap   = ['root' => ['id' => $generator->nextId(), 'level' => 0]]; // 初始化根节点层级
+        $pathMap   = ['root' => ['id' => Snowflake::generate(), 'level' => 0]]; // 初始化根节点层级
 
         foreach ($routes as $route) {
             $parts        = explode('.', $route['name']);
@@ -195,7 +194,7 @@ class RouteOrganizerService
 
                 // 节点存在性检测
                 if (!isset($pathMap[$nodePath])) {
-                    $nodeId = $generator->nextId();
+                    $nodeId = Snowflake::generate();
                     $node   = [
                         'id'    => $nodeId,
                         'pid'   => $parentId,
