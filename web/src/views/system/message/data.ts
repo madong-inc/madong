@@ -84,7 +84,7 @@ export function useColumns(
     {
       title: $t('system.message.list.table.columns.related_id'),
       align: 'left',
-      field: 'title',
+      field: 'related_id',
       minWidth: 150,
       visible: false,
       slots: {
