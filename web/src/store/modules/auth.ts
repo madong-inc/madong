@@ -107,6 +107,20 @@ export const useAuthStore = defineStore('auth', () => {
    * @param _data 
    */
   async function setPreferences(_data: any) {
+          if (!_data || typeof _data !== 'object') {
+      return;
+    }
+    
+    // 检查是否有有效的偏好设置数据
+    const hasValidData = Object.keys(_data).some(key => {
+      const value = _data[key];
+      return value !== undefined && value !== null && 
+             (typeof value === 'object' ? Object.keys(value).length > 0 : true);
+    });
+    
+    if (!hasValidData) {
+      return; // 没有有效数据，直接返回，不输出警告
+    }
     const allowedKeys = ['theme', 'app']; 
     const updateData: Record<string, any> = {};
     for (const key of allowedKeys) {
