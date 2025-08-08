@@ -29,6 +29,8 @@
   "plain": "Plain",
   "rounded": "Rounded",
   "save":"Save",
+  "savePreferencesSuccess": "Preferences saved successfully",
+  "savePreferencesFailed": "Failed to save preferences",
   "copyPreferences": "Copy Preferences",
   "copyPreferencesSuccessTitle": "Copy successful",
   "copyPreferencesSuccess": "Copy successful, please override in `src/preferences.ts` under app",
