@@ -30,6 +30,8 @@
   "rounded": "圆润",
   "copyPreferences": "复制偏好设置",
   "save":"保存",
+  "savePreferencesSuccess": "偏好设置保存成功",
+  "savePreferencesFailed": "偏好设置保存失败",
   "copyPreferencesSuccessTitle": "复制成功",
   "copyPreferencesSuccess": "复制成功，请在 app 下的 `src/preferences.ts`内进行覆盖",
   "clearAndLogout": "清空缓存 & 退出登录",
