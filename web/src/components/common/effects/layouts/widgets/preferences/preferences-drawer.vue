@@ -57,6 +57,7 @@ import {
 } from './blocks';
 import { SystemUserApi } from '#/api/system/user';
 import { SaveOutlined } from '@ant-design/icons-vue';
+import { message as antMessage } from 'ant-design-vue';
 
 const emit = defineEmits<{ clearPreferencesAndLogout: [] }>();
 
@@ -225,7 +226,12 @@ async function handleCopy() {
 async function handleUserPreferences(){
   const {theme}= preferences;
   const api=new SystemUserApi();
-  await api.preferences({theme});
+  try {
+    await api.preferences({theme});
+    antMessage.success($t('preferences.savePreferencesSuccess'));
+  } catch (error) {
+    antMessage.error($t('preferences.savePreferencesFailed'));
+  }
 }
 
 
