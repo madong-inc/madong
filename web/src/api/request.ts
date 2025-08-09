@@ -3,7 +3,6 @@ import type { HttpResponse, RequestClientOptions } from '#/components/common/eff
 import { preferences } from '#/components/common/core/preferences';
 import {
   authenticateResponseInterceptor,
-  defaultResponseInterceptor,
   errorMessageResponseInterceptor,
   RequestClient,
 } from '#/components/common/effects/request';
@@ -36,7 +35,7 @@ function createRequestClient(baseURL: string, options?: RequestClientOptions) {
     accessStore.setAccessToken(null);
     if (
       preferences.app.loginExpiredMode === 'modal' &&
-      accessStore.isAccessChecked
+      accessStore.accessChecked
     ) {
       accessStore.setLoginExpired(true);
     } else {
