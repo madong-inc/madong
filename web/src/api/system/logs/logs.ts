@@ -1,5 +1,4 @@
 import BaseApi from '#/api/base-api';
-import { requestClient } from '#/api/request';
 import { SystemLoginRecordRow, SystemOperateRecordRow } from './logs-model';
 
 /**
