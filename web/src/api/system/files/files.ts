@@ -1,12 +1,12 @@
 import BaseApi from '#/api/base-api';
 import { requestClient } from '#/api/request';
-import { FileMetadata } from './files-model';
+import { SystemFilesRow } from './files-model';
 
 
 /**
  * 文件管理 API
  */
-export class SystemFielsApi extends BaseApi<FileMetadata> {
+export class SystemFielsApi extends BaseApi<SystemFilesRow> {
 
   /**
    * 构造函数
