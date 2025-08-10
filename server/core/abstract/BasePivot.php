@@ -17,18 +17,15 @@ use app\common\model\platform\Tenant;
 use app\common\scopes\global\AccessScope;
 use app\common\scopes\global\TenantScope;
 use Carbon\Carbon;
+use core\uuid\Snowflake;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\Pivot;
 use core\context\TenantContext;
-use madong\helper\Snowflake;
+
 
 class BasePivot extends Pivot
 {
-    private const WORKER_ID = 1;
-    private const DATA_CENTER_ID = 1;
 
-    // 定义常量
-    protected const CONNECTION_NAME = 'mysql';
 
     /**
      * 指明模型的ID是否自动递增。
@@ -65,12 +62,6 @@ class BasePivot extends Pivot
      */
     public $timestamps = false;
 
-    /**
-     * 雪花算法实例
-     *
-     * @var Snowflake|null
-     */
-    protected static ?Snowflake $snowflake = null;
 
     public function __construct(array $data = [])
     {
@@ -100,7 +91,7 @@ class BasePivot extends Pivot
         //注册创建事件
         static::creating(function ($model) {
             if (!isset($model->{$model->getKeyName()})) {
-                $model->{$model->getKeyName()} = self::generateSnowflakeID(); // 生成雪花 ID
+                $model->{$model->getKeyName()} = Snowflake::generate(); // 生成雪花 ID
             }
             self::setCreatedBy($model);
         });
@@ -260,28 +251,4 @@ class BasePivot extends Pivot
         }
     }
 
-    /**
-     *  实例化雪花算法
-     *
-     * @return Snowflake
-     */
-    private static function createSnowflake(): Snowflake
-    {
-        if (self::$snowflake == null) {
-            self::$snowflake = new Snowflake(self::WORKER_ID, self::DATA_CENTER_ID);
-        }
-        return self::$snowflake;
-    }
-
-    /**
-     * 生成雪花ID
-     *
-     * @return int
-     * @throws \Exception
-     */
-    private static function generateSnowflakeID(): int
-    {
-        $snowflake = self::createSnowflake();
-        return $snowflake->nextId();
-    }
 }
