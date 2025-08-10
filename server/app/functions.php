@@ -8,6 +8,7 @@ use app\common\services\system\SysConfigService;
 use core\jwt\JwtToken;
 use support\Container;
 
+
 /**
  * 获取当前认证用户信息
  *
@@ -18,30 +19,28 @@ use support\Container;
  */
 function getCurrentUser(bool $fullInfo = false, bool $refresh = false): mixed
 {
-    $request = request();
-    $rule    = $request->path();
-    if (in_array($rule, ['/system/logout'])) {
+    try {
+        // 1. 验证请求和授权令牌
+        $token = resolveAuthorizationToken();
+        if ($token === null) {
+            return null;
+        }
+
+        // 2. 获取当前用户ID
+        $userId = JwtToken::getCurrentId();
+        if ($userId === null) {
+            return null;
+        }
+
+        // 3. 根据参数返回相应数据
+        if ($refresh) {
+            return $fullInfo ? JwtToken::getUser() : $userId;
+        }
+
+        return $fullInfo ? JwtToken::getExtend() : $userId;
+    } catch (\Exception $e) {
         return null;
     }
-
-    // 1. 验证请求和授权令牌
-    $token = resolveAuthorizationToken();
-    if ($token === null) {
-        return null;
-    }
-
-    // 2. 获取当前用户ID
-    $userId = JwtToken::getCurrentId();
-    if ($userId === null) {
-        return null;
-    }
-
-    // 3. 根据参数返回相应数据
-    if ($refresh) {
-        return $fullInfo ? JwtToken::getUser() : $userId;
-    }
-
-    return $fullInfo ? JwtToken::getExtend() : $userId;
 }
 
 function resolveAuthorizationToken(): ?string
