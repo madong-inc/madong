@@ -249,7 +249,8 @@ setupVxeTable({
                 display: 'flex',
                 alignItems: 'center',
                 gap: opt.icon ? '4px' : '0', // 根据图标存在与否调整间距
-                whiteSpace: 'nowrap'
+                whiteSpace: 'nowrap',
+                width: '100%'
               },
               onClick: listen ? () => attrs?.onClick?.({ code: opt.code, row }) : undefined
             },
