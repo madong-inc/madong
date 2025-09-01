@@ -78,11 +78,3 @@
 ## 官方社区
 欢迎加入我们的官方社区交流互动<img src="https://svg.hamm.cn/badge.svg?key=QQ 频道&value= pd52261144"/>
 
-
-## 共同交流
-
-<img src="https://madong.tech/app/admin/upload/files/20250605/684160e45fcc.png" width="240" />
-
-
-## 加入我们
-欢迎加入技术交流群，与核心开发者直接沟通（扫码添加作者微信进群），共同打造更强大的开源企业级平台！
