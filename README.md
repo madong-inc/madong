@@ -6,7 +6,7 @@
 </p>
 <p align="center">
     <a href="https://www.madong.tech" target="_blank">官网</a> |
-    <a href="https://madong.tech/kbase/doc?name=md" target="_blank">文档</a> | 
+    <a href="https://madong.tech/doc/main" target="_blank">文档</a> | 
     <a href="https://admin.madong.tech" target="_blank">演示</a> |
     <a href="https://www.workerman.net/doc/webman/" target="_blank">Webman官方文档</a> 
 </p>
