@@ -2,10 +2,10 @@
 # 项目概述
 
 <p align="center">
-    <img src="https://madong.tech/app/kbase/upload/avatar/202503/67e75c135c1f.md.png" width="120" />
+    <img src="https://madong.tech/static/index/images/logo.png" width="120" />
 </p>
 <p align="center">
-    <a href="https://www.madong.tech" target="_blank">官网</a> |
+    <a href="https://madong.tech" target="_blank">官网</a> |
     <a href="https://madong.tech/doc/main" target="_blank">文档</a> | 
     <a href="https://admin.madong.tech" target="_blank">演示</a> |
     <a href="https://www.workerman.net/doc/webman/" target="_blank">Webman官方文档</a> 
