@@ -66,14 +66,6 @@
 - Composer：版本需 >= 2.x，用于PHP依赖管理。
 
 
-## 体验地址
-
-[体验地址](https://admin.madong.tech) https://admin.madong.tech
-- 账号：admin
-- 密码：123456
-期待您的使用和反馈，我们将不断优化和完善系统，为您提供更优质的服务。
-
-
 
 ## 官方社区
 欢迎加入我们的官方社区交流互动<img src="https://svg.hamm.cn/badge.svg?key=QQ 频道&value= pd52261144"/>
