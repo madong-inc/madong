@@ -3,14 +3,26 @@ English | [中文](./README.md)
 # Project Overview
 
 <p align="center">
-    <img src="https://madong.tech/app/kbase/upload/avatar/202503/67e75c135c1f.md.png" width="120" />
+    <img src="https://madong.tech/_nuxt/logo.NbywMHlW.png" width="120" />
 </p>
+
 <p align="center">
     <a href="https://www.madong.tech" target="_blank">Official Website</a> |
     <a href="https://madong.tech/kbase/doc?name=md" target="_blank">Documentation</a> | 
     <a href="https://admin.madong.tech" target="_blank">Demo</a> |
     <a href="https://www.workerman.net/doc/webman/" target="_blank">Webman Official Documentation</a> 
 </p>
+
+
+<div style="width:100%;background:#ffc107;padding:14px 20px;margin:10px 0;box-sizing:border-box;">
+    <strong style="color:#000000;font-size:17px;">
+        🔥 Madong SaaS 5.x 全新大版本尝鲜内测现已开启，
+        <a href="https://gitee.com/motion-code/madong/issues/IJWQK1" target="_blank" style="color:#d83020;text-decoration:underline;font-weight:bold;">立即点击申请资格</a>
+    </strong>
+</div>
+
+
+
 
 ## Open Source Multi-Tenant SaaS Rapid Development Framework
 We are committed to breaking the illusion of pseudo-open source, striving to build an exemplary open-source SaaS multi-tenant cloud platform architecture that combines excellence, simplicity, and beauty. Upholding the principle of "taking from open source and giving back to open source," we aim to free developers' valuable time, allowing them to enjoy every moment of life—whether it's leisurely relaxing, immersing in self-improvement, cherishing time with family, or pursuing fitness; or even encountering soulmates and painting beautiful life scenarios together.
