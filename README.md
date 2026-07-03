@@ -4,12 +4,6 @@
     <img src="https://madong.tech/_nuxt/logo.NbywMHlW.png" width="120" />
 </p>
 
-<div style="width:100%;background:#ffc107;padding:14px 20px;margin:10px 0;box-sizing:border-box;">
-    <strong style="color:#000000;font-size:17px;">
-        🔥 Madong Saas 5.x 全新大版本尝鲜内测现已开启，
-        <a href="https://gitee.com/motion-code/madong/issues/IJWQK1" target="_blank" style="color:#d83020;text-decoration:underline;font-weight:bold;">立即点击申请资格</a>
-    </strong>
-</div>
 
 <p align="center">
     <a href="https://madong.tech" target="_blank">官网</a> |
@@ -17,7 +11,13 @@
     <a href="https://admin.madong.tech" target="_blank">演示</a> |
     <a href="https://www.workerman.net/doc/webman/" target="_blank">Webman官方文档</a> 
 </p>
-<br/>
+<div style="width:100%;background:#ffc107;padding:14px 20px;margin:10px 0;box-sizing:border-box;">
+    <strong style="color:#000000;font-size:17px;">
+        🔥 Madong SaaS 5.x 全新大版本尝鲜内测现已开启，
+        <a href="https://gitee.com/motion-code/madong/issues/IJWQK1" target="_blank" style="color:#d83020;text-decoration:underline;font-weight:bold;">立即点击申请资格</a>
+    </strong>
+</div>
+
 
 ## 开源多租户Saas快速开发框架
 我们矢志破除假开源之迷障，倾力构筑一个集卓越、简约与美貌于一身的开源SaaS多租户云平台架构典范。坚守“取之于开源，回馈于开源”的初心，旨在大幅降低业务开发成本，为开发者节省大量重复造轮子的时间。让大家拥有更多闲暇，可惬意休闲充电、深耕技术提升、暖心陪伴家人、运动强健体魄，奔赴生活与热爱。
